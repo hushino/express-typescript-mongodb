@@ -5,6 +5,9 @@ export async function startConnection() {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false
+    }).then(() => {
+        console.log('Database is connected')
+    }).catch((e) => {
+        console.log(e)
     })
-    console.log('Database is connected')
 }
