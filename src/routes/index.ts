@@ -5,7 +5,7 @@ const router = Router()
 
 router.route('/photos')
     .post(multer.single('image'), createPhoto)
-    .get(getPhotos);
+    .get(getPhotos)
 
 router.route('/photo/:id')
     .get(getPhotoById)

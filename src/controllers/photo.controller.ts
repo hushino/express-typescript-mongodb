@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import Photo from '../models/Photo'
 import fs from 'fs-extra'
 import path from 'path'
+import sharpe from '../libs/sharp'
 
 export async function getPhotoById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params
@@ -17,6 +18,7 @@ export async function getPhotos(req: Request, res: Response): Promise<Response> 
 
 export async function createPhoto(req: Request, res: Response): Promise<Response> {
     const { title, description } = req.body
+    sharpe(req.file)
     const newPhoto = {
         title: title,
         description: description,

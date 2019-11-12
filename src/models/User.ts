@@ -9,7 +9,8 @@ const userSchema = new Schema({
 interface IUser extends Document {
     username: string,
     email: string,
-    password: string
+    password: string,
+    role: string
 }
 userSchema.methods.encryptPassword = async (password: any) => {
     const salt = await bcrypt.genSalt(10);
