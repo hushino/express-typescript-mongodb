@@ -2,6 +2,7 @@ import express, { Application } from 'express'
 import morgan from 'morgan'
 import router from './routes/index'
 import path from 'path'
+import helmet from 'helmet'
 
 export class App {
     private app: Application
@@ -19,6 +20,7 @@ export class App {
     middlewares() {
         this.app.use(morgan('dev'))
         this.app.use(express.json())
+        this.app.use(helmet())
     }
     router() {
         this.app.use('/api', router)
