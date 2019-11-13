@@ -8,15 +8,20 @@ import sharp from 'sharp'
 export async function getHome(req: Request, res: Response) {
     res.render('index', { title: 'Express' })
 }
+
+export async function logout(req:Request,res:Response) {
+    req.session.destroy
+}
+
 export async function login(req: Request, res: Response) {
     let { email, password } = req.body
-    /* if (!req.session?.views) {
-        req.session.views = { role: "admin" }
-    }
-    console.log(req.session) */
     let checkifuserexist = await User.findOne({password: new RegExp('^'+password+'$', "i"),email: new RegExp('^'+email+'$', "i")})
     if (checkifuserexist) {
         console.log("usuario existe")
+        if (!req.session?.role) {
+            req.session.role = { role: checkifuserexist.role }
+        }
+        console.log(req.session)
     } else {
         console.log("usuario no existe")
     }
@@ -47,6 +52,7 @@ export async function getPhotoById(req: Request, res: Response): Promise<Respons
 export async function getPhotos(req: Request, res: Response): Promise<Response> {
   
     const photos = await Photo.find()
+    //return res.json(photos)
     return res.json(photos)
 }
 
