@@ -2,6 +2,14 @@ artillery quick --count 100 -n 200 http://localhost:3000/photos
 guide to pm2: pm2 stop all, pm2 start index.js -i max
 notebook: i5 4210u, 4gb ram, ssd 120gb
 mongodb 4.2, mongoose 5.7, nodejs 12, express 4.17 with router and middlewares.
+
+Scenarios launched is the number of virtual users created in the preceding 10 seconds (or in total)
+Scenarios completed is the number of virtual users that completed their scenarios in the preceding 10 seconds (or in the whole test). Note: this is the number of completed sessions, not the number of sessions started and completed in a 10 second interval.
+Requests completed is the number of HTTP requests and responses or WebSocket messages sent
+RPS sent is the average number of requests per second completed in the preceding 10 seconds (or throughout the test)
+Request latency is in milliseconds, and p95 and p99 values are the 95th and 99th percentile values (a request latency p99 value of 500ms means that 99 out of 100 requests took 500ms or less to complete).
+Codes provides the breakdown of HTTP response codes received.
+
 6 documents with size of 666B
 Elapsed time: 1 minute, 14 seconds
 Summary report @ 23:28:21(-0300) 2019-11-12
@@ -73,3 +81,18 @@ Summary report @ 23:39:15(-0300) 2019-11-12
   Codes:
     200: 20000
 -----------------------------------------------
+npm run dev = 1m6s
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  20000
+  RPS sent: 300.53
+  Request latency:
+    min: 3.5
+    max: 8270
+    median: 268.1
+    p95: 438.8
+    p99: 560.4
+  Scenario counts:
+    0: 100 (100%)
+  Codes:
+    200: 20000
