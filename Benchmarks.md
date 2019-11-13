@@ -116,7 +116,7 @@ Summary report @ 10:30:21(-0300) 2019-11-13
     200: 20000
 -----------------------------------------------
 FASTIFY without pm2
-mongoose
+mongoose, artillery quick --count 100 -n 200 http://localhost:3001
 Elapsed time: 35 seconds
 Summary report @ 11:16:25(-0300) 2019-11-13
   Scenarios launched:  100
