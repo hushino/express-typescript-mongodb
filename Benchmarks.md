@@ -115,3 +115,22 @@ Summary report @ 10:30:21(-0300) 2019-11-13
   Codes:
     200: 20000
 -----------------------------------------------
+FASTIFY without pm2
+mongoose
+Elapsed time: 35 seconds
+Summary report @ 11:16:25(-0300) 2019-11-13
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  20000
+  RPS sent: 565.13
+  Request latency:
+    min: 9.1
+    max: 8093.6
+    median: 77.3
+    p95: 123.7
+    p99: 187.6
+  Scenario counts:
+    0: 100 (100%)
+  Codes:
+    200: 20000
+-----------------------------------------------
