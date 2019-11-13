@@ -52,7 +52,6 @@ export async function getPhotoById(req: Request, res: Response): Promise<Respons
 export async function getPhotos(req: Request, res: Response): Promise<Response> {
   
     const photos = await Photo.find()
-    //return res.json(photos)
     return res.json(photos)
 }
 
