@@ -1,10 +1,10 @@
-import { Router, Request, Response } from 'express'
+import { Router, Request, Response,NextFunction } from 'express'
 import multer from '../libs/multer'
 import { logout, login, register, getHome, createPhoto, getPhotos, getPhotoById, deletePhoto, updatePhoto } from '../controllers/photo.controller'
 const router = Router()
 
 function hasAccess(accessLevel: string) {
-    return function (req: Request, res: Response, next: any) {
+    return function (req: Request, res: Response, next: NextFunction) {
         console.log(req.session.role)
         if (req.session.role && accessLevel.search(req.session.role)  ) {
             return next()

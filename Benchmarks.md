@@ -96,3 +96,21 @@ npm run dev = 1m6s
     0: 100 (100%)
   Codes:
     200: 20000
+-----------------------------------------------
+Elapsed time: 1 minute, 18 seconds
+async.parallel without pm2
+Summary report @ 10:30:21(-0300) 2019-11-13
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  20000
+  RPS sent: 257.86
+  Request latency:
+    min: 5.4
+    max: 8279.6
+    median: 325
+    p95: 504.5
+    p99: 644.9
+  Scenario counts:
+    0: 100 (100%)
+  Codes:
+    200: 20000

@@ -4,9 +4,9 @@ import User from '../models/User'
 import fs from 'fs-extra'
 import path from 'path'
 import sharp from 'sharp'
+import async from 'async'
 
 export async function getHome(req: Request, res: Response) {
-
     res.render('index', { title: 'Express' })
 }
 
@@ -24,7 +24,6 @@ export async function login(req: Request, res: Response) {
         console.log("usuario existe")
         if (!req.session?.role) {
             req.session.role = { role: checkifuserexist.role }
-
         }
         console.log(req.session)
         res.render('index', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
@@ -59,10 +58,26 @@ export async function getPhotoById(req: Request, res: Response): Promise<Respons
     return res.json(photo)
 }
 
-export async function getPhotos(req: Request, res: Response): Promise<Response> {
-
-    const photos = await Photo.find()
-    return res.json(photos)
+export async function getPhotos(req: Request, res: Response) {
+    //const photos = async () => await Photo.find()
+    //const photos = await Photo.find()
+    const d: async.Dictionary<unknown>[] = []
+    async.parallel({
+        task1: async function (callback) {
+            //console.log('Task One')
+            const photos = await Photo.find()
+           // console.log(photos)
+            return res.json(photos)
+            //callback(null, photos)
+        }
+    }, async function (err, results) {
+       // console.log(results);
+        //d.push(results)
+        //return res.json(results)
+        //return res.json(results)
+        //results now equals to: { task1: 1, task2: 2 }
+    });
+  //  return res.json(d)
 }
 
 export async function createPhoto(req: Request, res: Response): Promise<Response> {
