@@ -40,7 +40,7 @@ export class App {
              }), */
             saveUninitialized: false,
             resave: false,
-            cookie: { secure: true, maxAge: 60000 }
+            cookie: { secure: false, maxAge: 600000 }
         }));
     }
     router() {
