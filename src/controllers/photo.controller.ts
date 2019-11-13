@@ -58,26 +58,9 @@ export async function getPhotoById(req: Request, res: Response): Promise<Respons
     return res.json(photo)
 }
 
-export async function getPhotos(req: Request, res: Response) {
-    //const photos = async () => await Photo.find()
-    //const photos = await Photo.find()
-    const d: async.Dictionary<unknown>[] = []
-    async.parallel({
-        task1: async function (callback) {
-            //console.log('Task One')
-            const photos = await Photo.find().lean(true)
-           // console.log(photos)
-            return res.send(photos)
-            //callback(null, photos)
-        }
-    }, async function (err, results) {
-       // console.log(results);
-        //d.push(results)
-        //return res.json(results)
-        //return res.json(results)
-        //results now equals to: { task1: 1, task2: 2 }
-    });
-  //  return res.json(d)
+export async function getPhotos(req: Request, res: Response): Promise<Response> {
+    const photos = await Photo.find().lean(true)
+    return res.send(photos)
 }
 
 export async function createPhoto(req: Request, res: Response): Promise<Response> {
