@@ -10,27 +10,31 @@ export async function getHome(req: Request, res: Response) {
 }
 export async function login(req: Request, res: Response) {
     let { email, password } = req.body
-    let emailcheck = await User.exists(email && password)
-    if (emailcheck) {
-
+    /* if (!req.session?.views) {
+        req.session.views = { role: "admin" }
+    }
+    console.log(req.session) */
+    let checkifuserexist = await User.findOne({password: new RegExp('^'+password+'$', "i"),email: new RegExp('^'+email+'$', "i")})
+    if (checkifuserexist) {
+        console.log("usuario existe")
     } else {
-
+        console.log("usuario no existe")
     }
 }
 export async function register(req: Request, res: Response) {
-    let { email, password } = req.body
+    let { email, password, role } = req.body
     let newUser = {
         email: email,
         password: password,
-        role: 'user'
+        role: role
     }
-    const emailcheck = await User.exists(email)
-    if (emailcheck) {
-        res.render('index', { registererror: 'Un usuario con el mismo email ya existe' })
+    const emailcheck2 = await User.findOne({email: new RegExp('^'+email+'$', "i")})
+    if (emailcheck2) {
+        res.render('index', {  title: "el usuario ya existe",registererror: 'Un usuario con el mismo email ya existe' })
     } else {
         const register = new User(newUser)
         await register.save()
-        res.render('index', { registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
+        res.render('index', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
     }
 }
 
@@ -41,6 +45,7 @@ export async function getPhotoById(req: Request, res: Response): Promise<Respons
 }
 
 export async function getPhotos(req: Request, res: Response): Promise<Response> {
+  
     const photos = await Photo.find()
     return res.json(photos)
 }

@@ -17,7 +17,8 @@ userSchema.plugin(require('mongoose-role'), {
   
 interface IUser extends Document {
     email: string,
-    password: string
+    password: string,
+    role: string
 }
 
 /* userSchema.methods.encryptPassword = async (password: any) => {

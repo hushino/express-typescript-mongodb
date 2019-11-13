@@ -32,15 +32,16 @@ export class App {
         this.app.use(cookieParser())
         this.app.use(session({
             secret: 'somesecret3',
-            store: new MongoStore({url: 'mongodb://localhost/photodb', 
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-                useFindAndModify: false,
-                ttl: 7 * 24 * 60 * 60
-            }),
+            /*  store: new MongoStore({url: 'mongodb://localhost/photodb', 
+                 useNewUrlParser: true,
+                 useUnifiedTopology: true,
+                 useFindAndModify: false,
+                 ttl: 7 * 24 * 60 * 60
+             }), */
             saveUninitialized: false,
-            resave: false
-          }));
+            resave: false,
+            cookie: { secure: true, maxAge: 60000 }
+        }));
     }
     router() {
         this.app.use('/', router)
