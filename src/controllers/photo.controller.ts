@@ -65,9 +65,9 @@ export async function getPhotos(req: Request, res: Response) {
     async.parallel({
         task1: async function (callback) {
             //console.log('Task One')
-            const photos = await Photo.find()
+            const photos = await Photo.find().lean(true)
            // console.log(photos)
-            return res.json(photos)
+            return res.send(photos)
             //callback(null, photos)
         }
     }, async function (err, results) {

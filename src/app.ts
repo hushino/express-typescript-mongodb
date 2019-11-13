@@ -5,7 +5,7 @@ import path from 'path'
 import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
-const MongoStore = require('connect-mongo')(session);
+//const MongoStore = require('connect-mongo')(session);
 
 
 export class App {
