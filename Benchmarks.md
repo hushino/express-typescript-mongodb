@@ -219,7 +219,7 @@ Summary report @ 23:27:52(-0300) 2019-11-13
   Codes:
     200: 20000
 -----------------------------------------------
-hapi mongodb mongoose
+hapi mongodb mongoose aprox 666B, 4 doc
 Elapsed time: 36 seconds
 Summary report @ 23:35:11(-0300) 2019-11-13
   Scenarios launched:  100
