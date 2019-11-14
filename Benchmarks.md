@@ -237,7 +237,69 @@ Summary report @ 23:35:11(-0300) 2019-11-13
   Codes:
     200: 20000
 -----------------------------------------------
-
+artillery quick --count 100 -n 200 http://localhost:3000
+26sec, simple hello world using http and find-my-way
+Summary report @ 12:57:01(-0300) 2019-11-14
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  20000
+  RPS sent: 792.39
+  Request latency:
+    min: 0.3
+    max: 349.8
+    median: 63.1
+    p95: 123.2
+    p99: 189.2
+  Scenario counts:
+    0: 100 (100%)
+  Codes:
+    200: 20000
+23sec second round
+RPS sent: 848.9
+  Request latency:
+    min: 0.2
+    max: 242.9
+    median: 62.7
+    p95: 105.5
+    p99: 126
+22 sec second round Code Optimized
+RPS sent: 886.92
+  Request latency:
+    min: 0.3
+    max: 260.4
+    median: 60.5
+    p95: 94.8
+    p99: 137.2
+21 sec third round better code optimization
+RPS sent: 922.51
+  Request latency:
+    min: 0.2
+    max: 241.9
+    median: 58.3
+    p95: 83
+    p99: 110.2
 -----------------------------------------------
-
+fastify 23 sec simple hello world
+RPS sent: 879.89
+  Request latency:
+    min: 0.3
+    max: 430.1
+    median: 59.2
+    p95: 95.7
+    p99: 156.2
+fastify 21sec code optimized
+ Request latency:
+    min: 0.2
+    max: 274.6
+    median: 57.1
+    p95: 83.8
+    p99: 122.6
+fastify 20sec code optimized x2
+RPS sent: 1010.1
+  Request latency:
+    min: 0.3
+    max: 256.9
+    median: 53.7
+    p95: 76.5
+    p99: 96.4
 -----------------------------------------------
