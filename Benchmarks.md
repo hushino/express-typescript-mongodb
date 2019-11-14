@@ -134,3 +134,94 @@ Summary report @ 11:16:25(-0300) 2019-11-13
   Codes:
     200: 20000
 -----------------------------------------------
+FASTHTTP simple helloworld with fasthttprouter
+22sec
+Summary report @ 22:41:26(-0300) 2019-11-13
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  20000
+  RPS sent: 925.93
+  Request latency:
+    min: 0.2
+    max: 280.1
+    median: 56.9
+    p95: 93.2
+    p99: 164.2
+  Scenario counts:
+    0: 100 (100%)
+  Codes:
+    200: 20000
+code from techempower r18 random text 20sec:
+Summary report @ 23:08:59(-0300) 2019-11-13
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  20000
+  RPS sent: 978.95
+  Request latency:
+    min: 0.2
+    max: 238.8
+    median: 55.1
+    p95: 80.7
+    p99: 104.5
+  Scenario counts:
+    0: 100 (100%)
+  Codes:
+    200: 20000
+-----------------------------------------------
+Fastify simple hello world text/ 25sec
+Summary report @ 23:13:38(-0300) 2019-11-13
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  20000
+  RPS sent: 808.41
+  Request latency:
+    min: 0.2
+    max: 1901.8
+    median: 58.3
+    p95: 99.9
+    p99: 227.8
+  Scenario counts:
+    0: 100 (100%)
+  Codes:
+    200: 20000
+-----------------------------------------------
+Hapi simple hello world text/ 26 seconds
+Summary report @ 23:24:42(-0300) 2019-11-13
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  20000
+  RPS sent: 774.59
+  Request latency:
+    min: 0.5
+    max: 402.9
+    median: 65.7
+    p95: 125.7
+    p99: 157.3
+  Scenario counts:
+    0: 100 (100%)
+  Codes:
+    200: 20000
+-----------------------------------------------
+fastify 21sec simple hello world second round
+Summary report @ 23:27:52(-0300) 2019-11-13
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  20000
+  RPS sent: 924.21
+  Request latency:
+    min: 0.2
+    max: 252.2
+    median: 55.5
+    p95: 93.1
+    p99: 137.9
+  Scenario counts:
+    0: 100 (100%)
+  Codes:
+    200: 20000
+-----------------------------------------------
+
+-----------------------------------------------
+
+-----------------------------------------------
+
+-----------------------------------------------
