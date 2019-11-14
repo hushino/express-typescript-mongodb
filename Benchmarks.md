@@ -115,7 +115,7 @@ Summary report @ 10:30:21(-0300) 2019-11-13
   Codes:
     200: 20000
 -----------------------------------------------
-FASTIFY without pm2
+FASTIFY without pm2 mongodb
 mongoose, artillery quick --count 100 -n 200 http://localhost:3001
 Elapsed time: 35 seconds
 Summary report @ 11:16:25(-0300) 2019-11-13
@@ -185,7 +185,7 @@ Summary report @ 23:13:38(-0300) 2019-11-13
   Codes:
     200: 20000
 -----------------------------------------------
-Hapi simple hello world text/ 26 seconds
+Hapi v18.4.0, simple hello world text/ 26 seconds
 Summary report @ 23:24:42(-0300) 2019-11-13
   Scenarios launched:  100
   Scenarios completed: 100
@@ -219,7 +219,23 @@ Summary report @ 23:27:52(-0300) 2019-11-13
   Codes:
     200: 20000
 -----------------------------------------------
-
+hapi mongodb mongoose
+Elapsed time: 36 seconds
+Summary report @ 23:35:11(-0300) 2019-11-13
+  Scenarios launched:  100
+  Scenarios completed: 100
+  Requests completed:  20000
+  RPS sent: 551.27
+  Request latency:
+    min: 4.9
+    max: 8092.1
+    median: 81.2
+    p95: 129.1
+    p99: 168.3
+  Scenario counts:
+    0: 100 (100%)
+  Codes:
+    200: 20000
 -----------------------------------------------
 
 -----------------------------------------------
