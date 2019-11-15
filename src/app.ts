@@ -44,11 +44,26 @@ export class App {
             cookie: { secure: false, maxAge: 600000 }
         }));
         this.app.use((req, res, next) => {
-            //res.locals.isAuthenticated = req.user ? true : false;
-            if (!req.session?.role) {
-                // req.session.role = { role: checkifuserexist.role }
-                res.locals.isAuthenticated = false
+            let admin = 'administrador'
+            let contribuyente = 'contribuyente'
+            let inspector = 'inspector'
+            if (admin.localeCompare(req.session.role) === 1) {
+                res.locals.isAdmin = true
             }
+              else {
+                res.locals.isAdmin = false
+                if (inspector.localeCompare(req.session.role) === 1) {
+                    res.locals.isInspector = true
+                } else {
+                    res.locals.isInspector = false
+                    if (contribuyente.localeCompare(req.session.role) === 1) {
+                        res.locals.isContri = true
+                    } else {
+                        res.locals.isContri = false
+                    }
+                }
+            }
+            console.log(req.session.role)
             next();
         });
     }
@@ -58,6 +73,7 @@ export class App {
     // this folder for this application will be used to store public files
     uploadsConfig() {
         this.app.use('/uploads', express.static(path.resolve('uploads')))
+        this.app.use(express.static(path.join(__dirname, 'public')));
     }
     async listen() {
         this.app.listen(this.app.get('port'))

@@ -7,7 +7,7 @@ import sharp from 'sharp'
 import async from 'async'
 
 export async function getHome(req: Request, res: Response) {
-    res.render('index', { isAuthenticated: true, title: 'Express' })
+    res.render('index', { title: 'Express' })
 }
 
 export async function logout(req: Request, res: Response) {
@@ -19,17 +19,18 @@ export async function logout(req: Request, res: Response) {
 
 export async function login(req: Request, res: Response) {
     let { email, password } = req.body
-    let checkifuserexist = await User.findOne({ password: new RegExp('^' + password + '$', "i"), email: new RegExp('^' + email + '$', "i") })
+    let checkifuserexist = await User.findOne({ email: email, password: password })
     if (checkifuserexist) {
-        console.log("usuario existe")
-        if (!req.session?.role) {
-            req.session.role = { role: checkifuserexist.role }
-        }
-        console.log(req.session)
-        res.render('login', { isAuthenticated: true,title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
-
+        //console.log("usuario existe")
+        //Object.assign(req.session.cookie, "source");
+        let { role } = checkifuserexist
+        //console.log(req.session)
+        req.session.role = role
+        console.log(req.session.role)
+        res.render('index', { /* isAuthenticated: true, */title: "registro correcto" })
     } else {
-        console.log("usuario no existe")
+        // console.log("usuario no encontrado " + checkifuserexist)
+        req.session.role = ""
         res.render('login', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
 
     }
