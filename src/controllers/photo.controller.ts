@@ -13,6 +13,7 @@ export async function getHome(req: Request, res: Response) {
 export async function logout(req: Request, res: Response) {
     req.session.destroy((e) => {
         //console.log('error borrando cokie ' + e)
+        res.render('index', { title: 'Express' })
     })
     res.render('index', { title: 'Express' })
 }
@@ -21,8 +22,6 @@ export async function login(req: Request, res: Response) {
     let { email, password } = req.body
     let checkifuserexist = await User.findOne({ email: email, password: password })
     if (checkifuserexist) {
-        //console.log("usuario existe")
-        //Object.assign(req.session.cookie, "source");
         let { role } = checkifuserexist
         //console.log(req.session)
         req.session.role = role
