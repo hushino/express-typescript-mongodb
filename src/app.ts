@@ -17,7 +17,7 @@ export class App {
         this.settings()
         this.middlewares()
         this.router()
-        this.uploadsConfig()
+        this.uploadsAndStaticsPublicConfig()
     }
     settings() {
         this.app.set('port', this.port || process.env.PORT || 3000)
@@ -71,7 +71,7 @@ export class App {
         this.app.use('/', router)
     }
     // this folder for this application will be used to store public files
-    uploadsConfig() {
+    uploadsAndStaticsPublicConfig() {
         this.app.use('/uploads', express.static(path.resolve('uploads')))
         this.app.use(express.static(path.join(__dirname, 'public')));
     }
