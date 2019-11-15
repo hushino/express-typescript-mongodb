@@ -5,6 +5,7 @@ import path from 'path'
 import helmet from 'helmet'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
+import hasAccess from './auth/hasAccess'
 //const MongoStore = require('connect-mongo')(session);
 
 
@@ -42,6 +43,14 @@ export class App {
             resave: false,
             cookie: { secure: false, maxAge: 600000 }
         }));
+        this.app.use((req, res, next) => {
+            //res.locals.isAuthenticated = req.user ? true : false;
+            if (!req.session?.role) {
+                // req.session.role = { role: checkifuserexist.role }
+                res.locals.isAuthenticated = false
+            }
+            next();
+        });
     }
     router() {
         this.app.use('/', router)
@@ -51,7 +60,7 @@ export class App {
         this.app.use('/uploads', express.static(path.resolve('uploads')))
     }
     async listen() {
-        await this.app.listen(this.app.get('port'))
+        this.app.listen(this.app.get('port'))
         console.log('Server on port', 3000)
     }
 }

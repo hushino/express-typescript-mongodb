@@ -7,7 +7,7 @@ import sharp from 'sharp'
 import async from 'async'
 
 export async function getHome(req: Request, res: Response) {
-    res.render('index', { title: 'Express' })
+    res.render('index', { isAuthenticated: true, title: 'Express' })
 }
 
 export async function logout(req: Request, res: Response) {
@@ -26,11 +26,11 @@ export async function login(req: Request, res: Response) {
             req.session.role = { role: checkifuserexist.role }
         }
         console.log(req.session)
-        res.render('index', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
+        res.render('login', { isAuthenticated: true,title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
 
     } else {
         console.log("usuario no existe")
-        res.render('index', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
+        res.render('login', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
 
     }
 }

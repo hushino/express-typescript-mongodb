@@ -303,7 +303,7 @@ RPS sent: 1010.1
     p95: 76.5
     p99: 96.4
 -----------------------------------------------
-netty HTTP/2 enabled hello world
+netty HTTP/2 enabled hello world, java 8 221
 29 sec
 RPS sent: 687.29
   Request latency:
