@@ -9,6 +9,15 @@ import async from 'async'
 export async function getHome(req: Request, res: Response) {
     res.render('index', { title: 'Express' })
 }
+export async function contribuyente(req: Request, res: Response) {
+    res.render('contribuyente', { title: 'Express' })
+}
+export async function inspector(req: Request, res: Response) {
+    res.render('inspector', { title: 'Express' })
+}
+export async function admin(req: Request, res: Response) {
+    res.render('administrador', { title: 'Express' })
+}
 
 export async function logout(req: Request, res: Response) {
     req.session.destroy((e) => {
@@ -21,20 +30,23 @@ export async function logout(req: Request, res: Response) {
 export async function login(req: Request, res: Response) {
     let { email, password } = req.body
     let checkifuserexist = await User.findOne({ email: email, password: password })
+    console.log(checkifuserexist+ ' checkifuserexist')
     if (checkifuserexist) {
         let { role } = checkifuserexist
         //console.log(req.session)
         req.session.role = role
-        console.log(req.session.role)
-        res.render('index', { /* isAuthenticated: true, */title: "registro correcto" })
+        console.log(req.session.role + ' role ' + role)
+        res.redirect(role)
+        //res.render('index', { /* isAuthenticated: true, */title: "login correcto" })
     } else {
-        // console.log("usuario no encontrado " + checkifuserexist)
-        req.session.role = ""
-        res.render('login', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
-
+        req.session.role = ''
+        res.render('login', { title: "registro noc registro", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
     }
 }
 
+export async function registerGet(req: Request, res: Response) {
+    res.render('register', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
+}
 export async function register(req: Request, res: Response) {
     let { email, password, role } = req.body
     let newUser = {

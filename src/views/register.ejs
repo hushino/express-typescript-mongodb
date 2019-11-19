@@ -1,0 +1,20 @@
+<% include ./layouts/header %>
+<div class="elemento">
+<form class="pure-form pure-form-stacked" action="/register" method="POST">
+    <fieldset>
+        <legend>Registrarse</legend>
+
+        <label for="email">Email</label>
+        <input id="inputEmail" name="email" type="email" placeholder="Email">
+
+        <label for="password">Contraseña</label>
+        <input id="inputPassword" name="password" type="text" placeholder="Password">
+
+        <label for="password">Rol</label>
+        <input id="inputRole" name="role" type="text" placeholder="Rol">
+        
+        <button type="submit" class="pure-button pure-button-primary">Registrarse</button>
+    </fieldset>
+</form>
+</div>
+<% include ./layouts/footer %>

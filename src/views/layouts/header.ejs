@@ -9,26 +9,8 @@
 </head>
 <div class="container-fluid">
     <header>
-        
-        <!-- 
-        <nav>
-            <% if(isAdmin){ %>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/logout">Logout</a>
-            <% } else if(isInspector) { %>
-            <a href="/login">Inspector</a>
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
-            <% }else if(isContri) { %>
-            <a href="/register">Contibuyente</a>
-            <% } else { %>
-            <a href="/register">No sos nada</a>
-            <a href="/login">Login</a>
-            <%   } %>
-        </nav> -->
-
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">Control de camiones</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,12 +21,26 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
                     </li>
+                    <% if(isAdmin){ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/administrador">Panel Administrador</a>
+                    </li>
+                    <% } else if(isInspector) { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/inspector">Panel Inspector</a>
+                    </li>
+                    <% }else if(isContri) { %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contribuyente">Panel Contribuyente</a>
+                        </li>
+                    <% } else { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Iniciar Sesion</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/register">Registrarse</a>
                     </li>
+                    <%   } %>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

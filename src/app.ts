@@ -47,10 +47,24 @@ export class App {
             let admin = 'administrador'
             let contribuyente = 'contribuyente'
             let inspector = 'inspector'
-            if (admin.localeCompare(req.session.role) === 1) {
+            if (admin === res.req.session.role) {
                 res.locals.isAdmin = true
+            } else {
+                res.locals.isAdmin = false
+                if (inspector === res.req.session.role) {
+                    res.locals.isInspector = true
+                } else {
+                    res.locals.isInspector = false
+                    if (contribuyente === res.req.session.role) {
+                        res.locals.isContri = true
+                    } else {
+                        res.locals.isContri = false
+                    }
+                }
             }
-              else {
+            /* if (admin.localeCompare(req.session.role) === 1) {
+                res.locals.isAdmin = true
+            }else {
                 res.locals.isAdmin = false
                 if (inspector.localeCompare(req.session.role) === 1) {
                     res.locals.isInspector = true
@@ -62,8 +76,9 @@ export class App {
                         res.locals.isContri = false
                     }
                 }
-            }
-            console.log(req.session.role)
+            } */
+            //console.log(admin.localeCompare(req.session.role)+' dfgdfdsadsdsgfdfds')
+            console.log(req.session.role + ' req.session.role')
             next();
         });
     }
