@@ -62,22 +62,7 @@ export class App {
                     }
                 }
             }
-            /* if (admin.localeCompare(req.session.role) === 1) {
-                res.locals.isAdmin = true
-            }else {
-                res.locals.isAdmin = false
-                if (inspector.localeCompare(req.session.role) === 1) {
-                    res.locals.isInspector = true
-                } else {
-                    res.locals.isInspector = false
-                    if (contribuyente.localeCompare(req.session.role) === 1) {
-                        res.locals.isContri = true
-                    } else {
-                        res.locals.isContri = false
-                    }
-                }
-            } */
-            //console.log(admin.localeCompare(req.session.role)+' dfgdfdsadsdsgfdfds')
+            
             console.log(req.session.role + ' req.session.role')
             next();
         });
