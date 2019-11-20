@@ -11,7 +11,7 @@ router.route('/login').get(login).post(login)
 router.route('/logout').get(logout)
 
 router.route('/contribuyente').get(contribuyente)
-router.route('/inspector').get(inspector).post(multer.single('image'),postinspector)
+router.route('/inspector').get(inspector).post(multer.single('image'), postinspector)
 router.route('/administrador').get(admin)
 
 
