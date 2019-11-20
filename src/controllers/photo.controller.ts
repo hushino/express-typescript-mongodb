@@ -30,12 +30,12 @@ export async function logout(req: Request, res: Response) {
 export async function login(req: Request, res: Response) {
     let { email, password } = req.body
     let checkifuserexist = await User.findOne({ email: email, password: password })
-    console.log(checkifuserexist+ ' checkifuserexist')
+    //console.log(checkifuserexist+ ' checkifuserexist')
     if (checkifuserexist) {
         let { role } = checkifuserexist
         //console.log(req.session)
         req.session.role = role
-        console.log(req.session.role + ' role ' + role)
+       // console.log(req.session.role + ' role ' + role)
         res.redirect(role)
         //res.render('index', { /* isAuthenticated: true, */title: "login correcto" })
     } else {
