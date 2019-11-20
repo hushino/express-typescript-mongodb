@@ -71,7 +71,7 @@ export async function getPhotoById(req: Request, res: Response): Promise<Respons
 }
 export async function postinspector(req: Request, res: Response): Promise<Response>  {
     const { patente, cuit, foto } = req.body
-    console.log(req.body)
+    //console.log(req.body)
     let camion = {
         patente: patente,
         cuit: cuit,
