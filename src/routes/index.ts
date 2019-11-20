@@ -5,14 +5,14 @@ import hasAccess from '../auth/hasAccess'
 
 const router = Router()
 
-router.route('/').get( /* hasAccess('administrador'), */ getHome)
+router.route('/').get(getHome)
 router.route('/register').get(registerGet).post(register)
 router.route('/login').get(login).post(login)
 router.route('/logout').get(logout)
 
-router.route('/contribuyente').get(contribuyente)
-router.route('/inspector').get(inspector).post(multer.single('image'), postinspector)
-router.route('/administrador').get(admin)
+router.route('/contribuyente').get(hasAccess('contribuyente'), contribuyente)
+router.route('/inspector').get(hasAccess('inspector'), inspector).post(hasAccess('inspector'), multer.single('image'), postinspector)
+router.route('/administrador').get(hasAccess('administrador'), admin)
 
 
 /* router.route('/photos')

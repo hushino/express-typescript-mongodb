@@ -1,10 +1,13 @@
-import { Router, Request, Response,NextFunction } from 'express'
-
+import { Router, Request, Response, NextFunction } from 'express'
+let admin = 'administrador'
+let contribuyente = 'contribuyente'
+let inspector = 'inspector'
 export default function hasAccess(accessLevel: string) {
     return function (req: Request, res: Response, next: NextFunction) {
-        //console.log(req.session.role)
+        console.log(req.session.role+ ' sdas '+accessLevel)
         // change search for haslocale and compare 1 to true
-        if (req.session.role && accessLevel.search(req.session.role)  ) {
+        if ( req.session.role &&  req.session.role === accessLevel) {
+            console.log('entro al middleware')
             return next()
         }
         return res.json({
