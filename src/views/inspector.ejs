@@ -1,3 +1,19 @@
 <% include ./layouts/header %>
 <h1>inspector</h1>
+<form class="pure-form pure-form-stacked" action="/inspector" method="POST" enctype="multipart/form-data">
+    <fieldset>
+        <legend>Informacion del camion</legend>
+
+        <label for="patente">Patente</label>
+        <input id="patente" name="patente" type="text" placeholder="Patente">
+
+        <label for="cuit">CUIT</label>
+        <input id="cuit" name="cuit" type="number" placeholder="cuit">
+
+        <label for="image">Foto del camion</label>
+        <input id="image" name="image" type="file" placeholder="Foto de camion">
+
+        <button type="submit" class="pure-button pure-button-primary">Enviar</button>
+    </fieldset>
+</form>
 <% include ./layouts/footer %>

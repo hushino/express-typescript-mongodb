@@ -25,13 +25,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/administrador">Panel Administrador</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Cerrar sesion</a>
+                    </li>
                     <% } else if(isInspector) { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/inspector">Panel Inspector</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Cerrar sesion</a>
+                    </li>
                     <% }else if(isContri) { %>
                         <li class="nav-item">
                             <a class="nav-link" href="/contribuyente">Panel Contribuyente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Cerrar sesion</a>
                         </li>
                     <% } else { %>
                     <li class="nav-item">

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import Photo from '../models/Photo'
+import Camion from '../models/Camion'
 import User from '../models/User'
 import fs from 'fs-extra'
 import path from 'path'
@@ -66,11 +66,33 @@ export async function register(req: Request, res: Response) {
 
 export async function getPhotoById(req: Request, res: Response): Promise<Response> {
     const { id } = req.params
-    const photo = await Photo.findById(id)
+    const photo = await Camion.findById(id)
     return res.json(photo)
 }
+export async function postinspector(req: Request, res: Response): Promise<Response>  {
+    const { patente, cuit, foto } = req.body
+    console.log(req.body)
+    let camion = {
+        patente: patente,
+        cuit: cuit,
+        image: req.file.path + ".png"
+    }
+    const cami = new Camion(camion)
+    await cami.save()
+    await sharp(req.file.path)
+        .jpeg({ quality: 50 })
+        .toFile(
+            path.resolve('./uploads/' + req.file.filename + ".png")
+        )
+    fs.unlinkSync(req.file.path)
+   
+    return res.json({
+        message: 'Camion successfully saved',
+        cami
+    })
+}
 
-export async function getPhotos(req: Request, res: Response): Promise<Response> {
+/* export async function getPhotos(req: Request, res: Response): Promise<Response> {
     const photos = await Photo.find().lean(true)
     return res.send(photos)
 }
@@ -122,4 +144,4 @@ export async function updatePhoto(req: Request, res: Response): Promise<Response
 }
 export function helloworld(req: Request, res: Response): Response {
     return res.send('asdsada')
-}
+} */
