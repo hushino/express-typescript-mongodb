@@ -1,7 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express'
-let admin = 'administrador'
-let contribuyente = 'contribuyente'
-let inspector = 'inspector'
+
 export default function hasAccess(accessLevel: string) {
     return function (req: Request, res: Response, next: NextFunction) {
         console.log(req.session.role+ ' sdas '+accessLevel)
