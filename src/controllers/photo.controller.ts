@@ -9,9 +9,30 @@ import async from 'async'
 export async function getHome(req: Request, res: Response) {
     res.render('index', { title: 'Express' })
 }
-export async function contribuyente(req: Request, res: Response) {
-    res.render('contribuyente', { title: 'Express' })
-}
+export async function contribuyente(req: Request, res: Response,next:any) {
+        let perPage:number = 4;
+        let page:any = req.params.page || 1;
+        try {
+          const camion = await Camion.find({})
+            .sort({ createdAt: -1 })
+            .skip(perPage * page - perPage)
+            .limit(perPage)
+            .lean()
+            .exec(function(err:any, camion) {
+                Camion.count(0).exec(function(err:any, count:any) {
+                if (err) return next(err);
+                res.render("contribuyente", {
+                  serie: camion,
+                  current: page,
+                  pages: Math.ceil(count / perPage)
+                });
+              });
+            });
+        } catch (err) {
+          next(err);
+        }
+        //res.render('contribuyente', { title: 'Express' })
+ }
 export async function inspector(req: Request, res: Response) {
     res.render('inspector', { title: 'Express' })
 }
@@ -48,10 +69,11 @@ export async function registerGet(req: Request, res: Response) {
     res.render('register', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
 }
 export async function register(req: Request, res: Response) {
-    let { email, password, role } = req.body
+    let { email, password, cuit, role } = req.body
     let newUser = {
         email: email,
         password: password,
+        cuit:cuit,
         role: role
     }
     const emailcheck2 = await User.findOne({ email: new RegExp('^' + email + '$', "i") })

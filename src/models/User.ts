@@ -3,15 +3,16 @@ import bcrypt from 'bcryptjs'
 
 const userSchema = new Schema({
     email: String,
-    password: String
+    password: String,
+    cuit: String
 });
 
 userSchema.plugin(require('mongoose-role'), {
-    roles: ['inspector', 'usuario', 'administrador'],
+    roles: ['inspector', 'contribuyente', 'administrador'],
     accessLevels: {
       inspector: ['inspector'],
-      usuario: ['user'],
-      administrador: ['admin']
+      contribuyente: ['contribuyente'],
+      administrador: ['administrador']
     }
   })
   
