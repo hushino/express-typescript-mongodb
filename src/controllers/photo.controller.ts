@@ -4,37 +4,37 @@ import User from '../models/User'
 import fs from 'fs-extra'
 import path from 'path'
 import sharp from 'sharp'
-import async from 'async'
+import nodemailer from 'nodemailer'
 
 export async function getHome(req: Request, res: Response) {
     res.render('index', { title: 'Express' })
 }
-export async function contribuyente(req: Request, res: Response,next:any) {
-        let perPage:number = 4;
+export async function contribuyente(req: Request, res: Response, next: any) {
+    let perPage: number = 4;
     let page: any = req.params.page || 1;
     let cuit = req.session.cuit
-        try {
-          const camion = await Camion.find({ cuit: cuit})
+    try {
+        const camion = await Camion.find({ cuit: cuit })
             .sort({ createdAt: -1 })
             .skip(perPage * page - perPage)
             .limit(perPage)
             .lean()
-            .exec(function(err:any, camion) {
-                Camion.count(0).exec(function(err:any, count:any) {
-                if (err) return next(err);
-                res.render("contribuyente", {
-                  serie: camion,
-                  current: page,
-                  pages: Math.ceil(count / perPage)
+            .exec(function (err: any, camion) {
+                Camion.count(0).exec(function (err: any, count: any) {
+                    if (err) return next(err);
+                    res.render("contribuyente", {
+                        serie: camion,
+                        current: page,
+                        pages: Math.ceil(count / perPage)
+                    });
                 });
-              });
             });
-            console.log(camion)
-        } catch (err) {
-          next(err);
-        }
-        //res.render('contribuyente', { title: 'Express' })
- }
+        console.log(camion)
+    } catch (err) {
+        next(err);
+    }
+    //res.render('contribuyente', { title: 'Express' })
+}
 export async function inspector(req: Request, res: Response) {
     res.render('inspector', { title: 'Express' })
 }
@@ -58,7 +58,7 @@ export async function login(req: Request, res: Response) {
         let { role } = checkifuserexist
         //console.log(req.session)
         req.session.role = role
-       // console.log(req.session.role + ' role ' + role)
+        // console.log(req.session.role + ' role ' + role)
         res.redirect(role)
         //res.render('index', { /* isAuthenticated: true, */title: "login correcto" })
     } else {
@@ -75,7 +75,7 @@ export async function register(req: Request, res: Response) {
     let newUser = {
         email: email,
         password: password,
-        cuit:cuit,
+        cuit: cuit,
         role: role
     }
     const emailcheck2 = await User.findOne({ email: new RegExp('^' + email + '$', "i") })
@@ -93,7 +93,7 @@ export async function getPhotoById(req: Request, res: Response): Promise<Respons
     const photo = await Camion.findById(id)
     return res.json(photo)
 }
-export async function postinspector(req: Request, res: Response): Promise<Response>  {
+export async function postinspector(req: Request, res: Response): Promise<Response> {
     const { patente, cuit, foto } = req.body
     //console.log(req.body)
     let camion = {
@@ -109,7 +109,39 @@ export async function postinspector(req: Request, res: Response): Promise<Respon
             path.resolve('./uploads/' + req.file.filename + ".png")
         )
     fs.unlinkSync(req.file.path)
-   
+
+
+    let testAccount = await nodemailer.createTestAccount();
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: testAccount.user, // generated ethereal user
+            pass: testAccount.pass // generated ethereal password
+        }
+    });
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+        from: '"Fred Foo 👻" <foo@example.com>', // sender address
+        to: "bar@example.com, baz@example.com", // list of receivers
+        subject: "Hello ✔", // Subject line
+        text: "Hello world?", // plain text body
+        html: "<b>Hello world?</b>" // html body
+    });
+
+    console.log("Message sent: %s", info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+    // Preview only available when sending through an Ethereal account
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+
+
+
     return res.json({
         message: 'Camion successfully saved',
         cami
