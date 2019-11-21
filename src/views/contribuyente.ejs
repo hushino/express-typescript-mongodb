@@ -2,14 +2,14 @@
 <h1>contribuyente</h1>
 <% serie.forEach(function(serie) { %>
 					
-    <% const serieUrl = '/contribuyente/' + serie.slug;   %>
+    <% const serieUrl = '/contribuyente/' + serie.patente;   %>
 <div class="sada1">
-                <a href="contribuyente/<%- serie.slug %>" class="card-link">  <img class="image" id="image-home" src="<%- serie.cover %>" alt="Card image cap"></a>
+                <a href="contribuyente/<%- serie.patente %>" class="card-link">  <img style="max-width: 13% !important;" class="img-fluid" id="image-home" src="http://localhost:3000/<%- serie.image %>" alt="Card image cap"></a>
                     <h4 class="card-title">
                         <%- serie.patente.substring(0,18) %>
                     </h4>
                     <p class="card-text">
-                        <%- serie.patente.substring(0,20) %>...
+                        <%- serie.cuit.substring(0,20) %>...
                     </p>
             </div>
 <% }); %>

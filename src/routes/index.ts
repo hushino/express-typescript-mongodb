@@ -10,8 +10,8 @@ router.route('/register').get(registerGet).post(register)
 router.route('/login').get(login).post(login)
 router.route('/logout').get(logout)
 
-router.route('/contribuyente').get(hasAccess('contribuyente'), contribuyente)
-router.route('/inspector').get(hasAccess('inspector'), inspector).post(hasAccess('inspector'), multer.single('image'), postinspector)
+router.route('/contribuyente/:page').get(/* hasAccess('contribuyente'), */ contribuyente)
+router.route('/inspector').get(/* hasAccess('inspector'), */ inspector).post(/* hasAccess('inspector'), */ multer.single('image'), postinspector)
 router.route('/administrador').get(hasAccess('administrador'), admin)
 
 

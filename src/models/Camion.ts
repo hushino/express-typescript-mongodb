@@ -3,13 +3,13 @@ import { Schema, model, Document } from 'mongoose'
 const schema = new Schema({
     cuit: String,
     patente: String,
-    foto: String
+    image: String
 })
 
 interface ICamion extends Document {
     cuit: string,
     patente: string,
-    foto: string
+    image: string
 }
 
 export default model<ICamion>('Camion', schema)

@@ -11,9 +11,10 @@ export async function getHome(req: Request, res: Response) {
 }
 export async function contribuyente(req: Request, res: Response,next:any) {
         let perPage:number = 4;
-        let page:any = req.params.page || 1;
+    let page: any = req.params.page || 1;
+    let cuit = req.session.cuit
         try {
-          const camion = await Camion.find({})
+          const camion = await Camion.find({ cuit: cuit})
             .sort({ createdAt: -1 })
             .skip(perPage * page - perPage)
             .limit(perPage)
@@ -28,6 +29,7 @@ export async function contribuyente(req: Request, res: Response,next:any) {
                 });
               });
             });
+            console.log(camion)
         } catch (err) {
           next(err);
         }
