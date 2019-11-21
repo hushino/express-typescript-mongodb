@@ -94,7 +94,7 @@ export async function getPhotoById(req: Request, res: Response): Promise<Respons
     return res.json(photo)
 }
 export async function postinspector(req: Request, res: Response): Promise<Response> {
-    const { patente, cuit, foto } = req.body
+    const { patente, cuit, foto,email } = req.body
     //console.log(req.body)
     let camion = {
         patente: patente,
@@ -110,7 +110,9 @@ export async function postinspector(req: Request, res: Response): Promise<Respon
         )
     fs.unlinkSync(req.file.path)
 
-
+    if (email != null) {
+        //send email
+    }
     let testAccount = await nodemailer.createTestAccount();
 
     // create reusable transporter object using the default SMTP transport
@@ -139,8 +141,6 @@ export async function postinspector(req: Request, res: Response): Promise<Respon
     // Preview only available when sending through an Ethereal account
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-
-
 
     return res.json({
         message: 'Camion successfully saved',
