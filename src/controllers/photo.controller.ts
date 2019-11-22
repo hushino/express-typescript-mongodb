@@ -105,7 +105,8 @@ export async function postinspector(req: Request, res: Response): Promise<Respon
     let camion = {
         patente: patente,
         cuit: cuit,
-        image: req.file.path + ".png"
+        image: req.file.path + ".png",
+        estadocamion: 'En espera'
     }
     const cami = new Camion(camion)
     await cami.save()

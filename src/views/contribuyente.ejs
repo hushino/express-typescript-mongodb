@@ -1,50 +1,59 @@
 <% include ./layouts/header %>
-<h1>contribuyente</h1>
-<% serie.forEach(function(serie) { %>
-					
-    <% const serieUrl = '/contribuyente/' + serie.patente;   %>
-<div class="sada1">
-                <a href="contribuyente/<%- serie.patente %>" class="card-link">  <img style="max-width: 13% !important;" class="img-fluid" id="image-home" src="http://localhost:3000/<%- serie.image %>" alt="Card image cap"></a>
-                    <h4 class="card-title">
-                        <%- serie.patente.substring(0,18) %>
-                    </h4>
-                    <p class="card-text">
-                        <%- serie.cuit.substring(0,20) %>...
-                    </p>
-            </div>
-<% }); %>
-</div>
+<h1>Panel Contribuyente</h1>
 
-<div class="pagination">
-<% if (pages > 0) { %>
-<ul class="pagination text-center">
-<% if (current == 1) { %>
-    <a class="disabled"><<</a>
-<% } else { %>
-    <a href="/contribuyente/1"><<</a>
-<% } %>
-<% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-<% if (i !== 1) { %>
-    <a class="disabled">...</a>
-<% } %>
-<% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
-    <% if (i == current) { %>
-        <a class="active"><%= i %></a>
-    <% } else { %>
-        <a href="/contribuyente/<%= i %>"><%= i %></a>
-    <% } %>
-    <% if (i == Number(current) + 4 && i < pages) { %>
-        <a class="disabled">...</a>
-    <% } %>
-<% } %>
-<% if (current == pages) { %>
-    <a class="disabled">>></a>
-<% } else { %>
-   <a href="/contribuyente/<%= pages %>">>></a>
-<% } %>
-</ul>
-<% } %>
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Patente</th>
+            <th scope="col">Cuit</th>
+            <th scope="col">Confirmar pase del camion</th>
+            <th scope="col">Imagen del camion</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% serie.forEach(function(serie) { %>
+        <tr>
+            <td><%- serie.patente.substring(0,10) %></td>
+            <td><%- serie.cuit.substring(0,15) %></td>
+            <td><button type="button" class="btn btn-primary"> <%- serie.estadocamion %></button></td>
+            <td><img style="max-width: 13% !important;" class="img-fluid" id="image-home"
+                    src="http://localhost:3000/<%- serie.image %>" alt="Card image cap">
+            </td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
 
+
+
+<nav aria-label="Page navigation example">
+
+    <% if (pages > 0) { %>
+    <ul class="pagination">
+        <% if (current == 1) { %>
+        <li class="page-item"><a class="page-link" class="disabled">
+                << </a> <% } else { %> <a class="page-link" href="/contribuyente/1">
+                    <<</a> <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %> <% if (i !== 1) { %> <a
+                        class="page-link" class="disabled">...
+            </a></li>
+        <% } %>
+        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+        <% if (i == current) { %>
+        <li class="page-item"><a class="page-link active"><%= i %></a></li>
+        <% } else { %>
+        <li class="page-item"><a class="page-link" href="/contribuyente/<%= i %>"><%= i %></a></li>
+        <% } %>
+        <% if (i == Number(current) + 4 && i < pages) { %>
+        <li class="page-item"><a class="page-link disabled">...</a></li>
+        <% } %>
+        <% } %>
+        <% if (current == pages) { %>
+        <li class="page-item"><a class="page-link disabled">>></a></li>
+        <% } else { %>
+        <li class="page-item"><a class="page-link" href="/contribuyente/<%= pages %>">>></a></li>
+        <% } %>
+    </ul>
+    <% } %>
+</nav>
 
 <% include ./layouts/footer %>
