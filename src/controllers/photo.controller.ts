@@ -13,6 +13,7 @@ export async function contribuyente(req: Request, res: Response, next: any) {
     let perPage: number = 4;
     let page: any = req.params.page || 1;
     let cuit = req.session.cuit
+   // console.log('CUIT '+cuit)
     try {
         const camion = await Camion.find({ cuit: cuit })
             .sort({ createdAt: -1 })
@@ -55,9 +56,11 @@ export async function login(req: Request, res: Response) {
     let checkifuserexist = await User.findOne({ email: email, password: password })
     //console.log(checkifuserexist+ ' checkifuserexist')
     if (checkifuserexist) {
-        let { role } = checkifuserexist
+        let { role,cuit } = checkifuserexist
         //console.log(req.session)
         req.session.role = role
+        //console.log('cuit2 ' + cuit+ ' extra '+ checkifuserexist)
+        req.session.cuit = cuit
         // console.log(req.session.role + ' role ' + role)
         res.redirect(role)
         //res.render('index', { /* isAuthenticated: true, */title: "login correcto" })
