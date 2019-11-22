@@ -62,6 +62,9 @@ export async function login(req: Request, res: Response) {
         //console.log('cuit2 ' + cuit+ ' extra '+ checkifuserexist)
         req.session.cuit = cuit
         // console.log(req.session.role + ' role ' + role)
+        if (role === 'contribuyente') {
+            res.redirect(role+'/1')
+        }
         res.redirect(role)
         //res.render('index', { /* isAuthenticated: true, */title: "login correcto" })
     } else {
