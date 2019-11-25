@@ -1,0 +1,36 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cambiar estado del camion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/cambiarestadocamion" method="POST">
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="cambiarestadocamion">Toque para abrir las opciones</label>
+                        <select class="form-control" name="cambiarestadocamion" id="cambiarestadocamion">
+                            <option>Confirmar pase del camion</option>
+                            <option>Denegar pase del camion</option>
+                        </select>
+                    </div>
+
+                    <input name="cambiarestadocamion2" id="cambiarestadocamion2" type="hidden" class="form-control"
+                        value="<%- serie._id %>">
+
+                </div>
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger">Aplicar cambios de estado</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
