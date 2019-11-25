@@ -78,12 +78,12 @@ export async function registerGet(req: Request, res: Response) {
     res.render('register', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
 }
 export async function register(req: Request, res: Response) {
-    let { email, password, cuit, role } = req.body
+    let { email, password, cuit } = req.body
     let newUser = {
         email: email,
         password: password,
         cuit: cuit,
-        role: role
+        role: 'contribuyente'
     }
     const emailcheck2 = await User.findOne({ email: new RegExp('^' + email + '$', "i") })
     if (emailcheck2) {
