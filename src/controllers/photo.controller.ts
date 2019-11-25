@@ -79,6 +79,8 @@ export async function registerGet(req: Request, res: Response) {
 }
 export async function register(req: Request, res: Response) {
     let { email, password, cuit, numerodecelular } = req.body
+    console.log(req.files['dni'][0].path)
+    console.log(req.files['dni'][1].path)
     let newUser = {
         email: email,
         password: password,
@@ -88,9 +90,6 @@ export async function register(req: Request, res: Response) {
         fotodniatras: req.files['dni'][1].path + ".png",
         role: 'contribuyente'
     }
-    
-    console.log(req.files['dni'][0].path)
-    console.log(req.files['dni'][1].path)
 
     await sharp(req.files['dni'][0].path)
         .jpeg({ quality: 50 })
@@ -98,6 +97,8 @@ export async function register(req: Request, res: Response) {
             path.resolve('./uploads/' + req.files['dni'][0].filename + ".png")
         )
     fs.unlinkSync(req.files['dni'][0].path)
+
+    
     await sharp(req.files['dni'][1].path)
         .jpeg({ quality: 50 })
         .toFile(
