@@ -4,7 +4,9 @@ import bcrypt from 'bcryptjs'
 const userSchema = new Schema({
     email: String,
     password: String,
-    cuit: String
+    cuit: String,
+    fotodnidelante: String,
+    fotodniatras:String
 });
 
 userSchema.plugin(require('mongoose-role'), {
@@ -20,7 +22,9 @@ interface IUser extends Document {
     email: string,
     password: string,
     role: string,
-    cuit: string
+    cuit: string,
+    fotodnidelante: string,
+    fotodniatras:string
 }
 
 /* userSchema.methods.encryptPassword = async (password: any) => {

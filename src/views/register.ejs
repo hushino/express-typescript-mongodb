@@ -1,6 +1,6 @@
 <% include ./layouts/header %>
 <div class="container">
-    <form>
+    <form action="/register" method="POST">
         <div class="form-group">
             <label for="email">Su correo electronico</label>
             <input type="email" name="email" class="form-control" id="email" >
@@ -10,12 +10,16 @@
             <input type="password" name="password" class="form-control" id="password"   >
         </div>
         <div class="form-group">
+            <label for="numerodecelular">Numero de celular</label>
+            <input type="text" name="numerodecelular" class="form-control" id="numerodecelular"   >
+        </div>
+        <div class="form-group">
             <label for="dniadelante">Foto de la parte de adelante de su DNI</label>
-            <input type="file" class="form-control-file" id="dniadelante">
+            <input type="file" class="form-control-file" name="dni" id="dniadelante">
         </div>
         <div class="form-group">
             <label for="dniatras">Foto de la parte de atras de su DNI</label>
-            <input type="file" class="form-control-file" id="dniatras">
+            <input type="file" class="form-control-file" name="dni" id="dniatras">
         </div>
         <button type="submit" class="btn btn-info">Registrarse</button>
     </form>

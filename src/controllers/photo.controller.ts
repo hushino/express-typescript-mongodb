@@ -78,13 +78,33 @@ export async function registerGet(req: Request, res: Response) {
     res.render('register', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
 }
 export async function register(req: Request, res: Response) {
-    let { email, password, cuit } = req.body
+    let { email, password, cuit, numerodecelular } = req.body
     let newUser = {
         email: email,
         password: password,
         cuit: cuit,
+        numerodecelular: numerodecelular,
+        fotodnidelante: req.files['dni'][0].path + ".png",
+        fotodniatras: req.files['dni'][1].path + ".png",
         role: 'contribuyente'
     }
+    
+    console.log(req.files['dni'][0].path)
+    console.log(req.files['dni'][1].path)
+
+    await sharp(req.files['dni'][0].path)
+        .jpeg({ quality: 50 })
+        .toFile(
+            path.resolve('./uploads/' + req.files['dni'][0].filename + ".png")
+        )
+    fs.unlinkSync(req.files['dni'][0].path)
+    await sharp(req.files['dni'][1].path)
+        .jpeg({ quality: 50 })
+        .toFile(
+            path.resolve('./uploads/' + req.files['dni'][1].filename + ".png")
+        )
+    fs.unlinkSync(req.files['dni'][1].path)
+    
     const emailcheck2 = await User.findOne({ email: new RegExp('^' + email + '$', "i") })
     if (emailcheck2) {
         res.render('index', { title: "el usuario ya existe", registererror: 'Un usuario con el mismo email ya existe' })
@@ -103,14 +123,15 @@ export async function getPhotoById(req: Request, res: Response): Promise<Respons
 
 export async function cambiarestadocamion(req: Request, res: Response) {
     const { cambiarestadocamion2, cambiarestadocamion } = req.body
-    //console.log('CONTROLCAMIONSENDDATAYOTRASCOSASREQBODY ' + cambiarestadocamion2 + "  " + cambiarestadocamion)
+    console.log('CONTROLCAMIONSENDDATAYOTRASCOSASREQBODYcambiarestadocamion ' + cambiarestadocamion)
     const camionactual = await Camion.findById(cambiarestadocamion2)
     // console.log(camionactual)
     camionactual.estadocamion = cambiarestadocamion
     await Camion.findByIdAndUpdate(cambiarestadocamion2, camionactual)
     return res.render('contribuyente')
 }
-export async function postinspector(req: Request, res: Response){
+
+export async function postinspector(req: Request, res: Response) {
     const { patente, cuit, foto, email } = req.body
     //console.log(req.body)
     let camion = {

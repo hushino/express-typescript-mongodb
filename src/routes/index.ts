@@ -1,12 +1,13 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import multer from '../libs/multer'
-import { logout,cambiarestadocamion, postinspector, inspector, contribuyente, admin, login, registerGet, register, getHome, getPhotoById } from '../controllers/photo.controller'
+import multer2 from '../libs/multer2'
+import { logout, cambiarestadocamion, postinspector, inspector, contribuyente, admin, login, registerGet, register, getHome, getPhotoById } from '../controllers/photo.controller'
 import hasAccess from '../auth/hasAccess'
 
 const router = Router()
 
 router.route('/').get(getHome)
-router.route('/register').get(registerGet).post(register)
+router.route('/register').get(registerGet).post(multer2.array('dni',2), register)
 router.route('/login').get(login).post(login)
 router.route('/logout').get(logout)
 
