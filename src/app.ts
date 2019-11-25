@@ -28,7 +28,7 @@ export class App {
     middlewares() {
         this.app.use(morgan('dev'))
         this.app.use(express.json())
-        //this.app.use(helmet())
+        this.app.use(helmet())
         this.app.use(express.urlencoded({ extended: true }))
         this.app.use(cookieParser())
         this.app.use(session({
