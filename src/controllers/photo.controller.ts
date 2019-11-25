@@ -5,6 +5,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import sharp from 'sharp'
 import nodemailer from 'nodemailer'
+import twilio from 'twilio'
 
 export async function getHome(req: Request, res: Response) {
     res.render('index', { title: 'Express' })
@@ -104,9 +105,9 @@ export async function cambiarestadocamion(req: Request, res: Response) {
     const { cambiarestadocamion2, cambiarestadocamion } = req.body
     //console.log('CONTROLCAMIONSENDDATAYOTRASCOSASREQBODY ' + cambiarestadocamion2 + "  " + cambiarestadocamion)
     const camionactual = await Camion.findById(cambiarestadocamion2)
-   // console.log(camionactual)
+    // console.log(camionactual)
     camionactual.estadocamion = cambiarestadocamion
-    await Camion.findByIdAndUpdate(cambiarestadocamion2,camionactual)
+    await Camion.findByIdAndUpdate(cambiarestadocamion2, camionactual)
     return res.render('contribuyente')
 }
 export async function postinspector(req: Request, res: Response): Promise<Response> {
@@ -126,6 +127,17 @@ export async function postinspector(req: Request, res: Response): Promise<Respon
             path.resolve('./uploads/' + req.file.filename + ".png")
         )
     fs.unlinkSync(req.file.path)
+    const accountSid = 'AC6c3e72cc3c7ae41ea64dc1f6f9bb5fd6'; // Your Account SID from www.twilio.com/console
+    const authToken = '207c0701b0ec5593ed5bcee23d43de7a';   // Your Auth Token from www.twilio.com/console
+
+    const client = twilio(accountSid, authToken);
+
+    client.messages.create({
+        body: 'Hello from Node',
+        to: '+543718577823',  // Text this number
+        from: '+12016547913' // From a valid Twilio number
+    })
+        .then((message: any) => console.log(message.sid));
 
     /*  if (email != null) {
          //send email
