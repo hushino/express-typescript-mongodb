@@ -110,7 +110,7 @@ export async function cambiarestadocamion(req: Request, res: Response) {
     await Camion.findByIdAndUpdate(cambiarestadocamion2, camionactual)
     return res.render('contribuyente')
 }
-export async function postinspector(req: Request, res: Response): Promise<Response> {
+export async function postinspector(req: Request, res: Response){
     const { patente, cuit, foto, email } = req.body
     //console.log(req.body)
     let camion = {
@@ -136,8 +136,7 @@ export async function postinspector(req: Request, res: Response): Promise<Respon
         body: 'Hello from Node',
         to: '+543718577823',  // Text this number
         from: '+12016547913' // From a valid Twilio number
-    })
-        .then((message: any) => console.log(message.sid));
+    }).then((message: any) => console.log(message.sid))
 
     /*  if (email != null) {
          //send email
@@ -170,11 +169,12 @@ export async function postinspector(req: Request, res: Response): Promise<Respon
      // Preview only available when sending through an Ethereal account
      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info)); */
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-
+    /* 
     return res.json({
         message: 'Camion successfully saved',
         cami
-    })
+    }) */
+    return res.render('inspector')
 }
 
 /* export async function getPhotos(req: Request, res: Response): Promise<Response> {
