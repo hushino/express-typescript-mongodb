@@ -13,7 +13,7 @@ router.route('/logout').get(logout)
 
 router.route('/contribuyente/:page').get(/* hasAccess('contribuyente'), */ contribuyente)
 router.route('/inspector').get(/* hasAccess('inspector'), */ inspector).post(/* hasAccess('inspector'), */ multer.single('image'), postinspector)
-router.route('/administrador').get(/* hasAccess('administrador'),  */admin)
+router.route('/administrador/:page*?').get(/* hasAccess('administrador'),  */admin)
 
 router.route('/cambiarestadocamion').post(cambiarestadocamion)
 

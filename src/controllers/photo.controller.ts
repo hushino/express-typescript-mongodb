@@ -31,7 +31,7 @@ export async function contribuyente(req: Request, res: Response, next: any) {
                     });
                 });
             });
-        console.log(camion)
+        // console.log(camion)
     } catch (err) {
         next(err);
     }
@@ -44,10 +44,30 @@ export async function inspector(req: Request, res: Response) {
 // Permitir crear y borrar cuentas de inspector
 // Mostrar los contribuyentes y editar su cuenta cambiar estado verificado/en espera/denegado
 // De igual forma mostrar los camiones
-export async function admin(req: Request, res: Response) {
-    const userr = await Camion.find({})
-    console.log(userr)
-    res.render('administrador', { serie: userr })
+export async function admin(req: Request, res: Response, next: any) {
+    let perPage: number = 4;
+    let page: any = req.params.page || 1;
+    try {
+        await Camion.find({}).sort({ createdAt: -1 })
+            .skip(perPage * page - perPage)
+            .limit(perPage)
+            .lean()
+            .exec(function (err: any, camion) {
+                Camion.estimatedDocumentCount().exec(function (err: any, count: any) {
+                    if (err) return next(err);
+                    res.render("administrador", {
+                        serie: camion,
+                        current: page,
+                        pages: Math.ceil(count / perPage)
+                    });
+                });
+            });
+    } catch (err) {
+        next(err);
+    }
+    // const contribuyentes = await User.find({})
+    //console.log(userr)
+    //res.render('administrador', { contri:contribuyentes })
 }
 
 export async function logout(req: Request, res: Response) {
@@ -110,7 +130,7 @@ export async function register(req: Request, res: Response) {
             path.resolve('./uploads/' + req.files['dni1'][0].filename + ".png")
         )
     fs.unlinkSync(req.files['dni1'][0].path)
-    
+
     const emailcheck2 = await User.findOne({ email: new RegExp('^' + email + '$', "i") })
     if (emailcheck2) {
         res.render('index', { title: "el usuario ya existe", registererror: 'Un usuario con el mismo email ya existe' })
