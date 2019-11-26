@@ -1,10 +1,60 @@
 <% include ./layouts/header %>
-<h1>admin</h1>
-<form class="pure-form pure-form-stacked" action="/login" method="POST">
-    <fieldset>
-        <legend>ADMINISTRADOR</legend>
+<h1>Panel de Administracion</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Cuentas de contribuyente
+                </button>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2"
+                    aria-expanded="false" aria-controls="collapseExample2">
+                    Cuentas de inspectores
+                </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Patente</th>
+                                <th scope="col">Cuit</th>
+                                <th scope="col">Confirmar pase del camion</th>
+                                <th scope="col">Imagen del camion</th>
+                            </tr>
+                        </thead>
 
-       
-    </fieldset>
-</form>
+                        <tbody>
+                            <% if(typeof serie !== 'undefined') { %>
+
+                            <% serie.forEach(function(serie) { %>
+                            <tr>
+                                <td><%- serie.patente.substring(0,10)%></td>
+                                <td><%- serie.cuit.substring(0,15) %></td>
+                                <td><button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        <%- serie.estadocamion %>
+                                    </button>
+                                    <%- include('form', {serie: serie}); %>
+                                </td>
+                                <td><img style="max-width: 13% !important;" class="img-fluid" id="image-home"
+                                        src="http://localhost:3000/<%- serie.image %>" alt="Card image cap">
+                                </td>
+                            </tr>
+                            <% }); %>
+                            <% } %>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="collapse" id="collapseExample2">
+                <div class="card card-body">
+                    Cuentas de inspectores
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <% include ./layouts/footer %>

@@ -8,7 +8,7 @@ import nodemailer from 'nodemailer'
 import twilio from 'twilio'
 
 export async function getHome(req: Request, res: Response) {
-    res.render('index', { title: 'Express' })
+    res.render('index', { title: 'Control de camiones' })
 }
 export async function contribuyente(req: Request, res: Response, next: any) {
     let perPage: number = 4;
@@ -41,7 +41,9 @@ export async function inspector(req: Request, res: Response) {
     res.render('inspector', { title: 'Express' })
 }
 export async function admin(req: Request, res: Response) {
-    res.render('administrador', { title: 'Express' })
+    const userr = await Camion.find({})
+    console.log(userr)
+    res.render('administrador', { serie: userr })
 }
 
 export async function logout(req: Request, res: Response) {
@@ -154,7 +156,7 @@ export async function postinspector(req: Request, res: Response) {
     const client = twilio(accountSid, authToken);
 
     client.messages.create({
-        body: 'Hello from Node',
+        body: 'Existe un camion en espera de aprobacion por parte del contribuyente ingrese a www.controlcamiones.com',
         to: '+543718577823',  // Text this number
         from: '+12016547913' // From a valid Twilio number
     }).then((message: any) => console.log(message.sid))
