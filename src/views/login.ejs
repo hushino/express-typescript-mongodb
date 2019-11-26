@@ -1,17 +1,15 @@
 <% include ./layouts/header %>
-<div class="elemento">
-<form class="pure-form pure-form-stacked" action="/login" method="POST">
-    <fieldset>
-        <legend>A Stacked Form</legend>
-
-        <label for="email">Email</label>
-        <input id="inputEmail" name="email" type="email" placeholder="Email">
-
-        <label for="password">Password</label>
-        <input id="inputPassword" name="password" type="text" placeholder="Password">
-
-        <button type="submit" class="pure-button pure-button-primary">Sign in</button>
-    </fieldset>
-</form>
+<div class="container">
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" id="inputEmail" name="email" type="email" placeholder="Correo electronico" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input class="form-control" id="inputPassword" name="password" type="text" placeholder="Contraseña" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Iniciar sesion</button>
+    </form>
 </div>
 <% include ./layouts/footer %>

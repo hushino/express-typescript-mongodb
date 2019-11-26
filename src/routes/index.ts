@@ -7,7 +7,7 @@ import hasAccess from '../auth/hasAccess'
 const router = Router()
 
 router.route('/').get(getHome)
-router.route('/register').get(registerGet).post(multer.array('dni',2), register)
+router.route('/register').get(registerGet).post(multer.fields([{ name: 'dni', maxCount: 1 }, { name: 'dni1', maxCount: 1 }]), register)
 router.route('/login').get(login).post(login)
 router.route('/logout').get(logout)
 

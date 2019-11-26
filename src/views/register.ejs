@@ -1,27 +1,64 @@
 <% include ./layouts/header %>
 <div class="container">
-    <form action="/register" method="POST">
-        <div class="form-group">
-            <label for="email">Su correo electronico</label>
-            <input type="email" name="email" class="form-control" id="email" >
+    <div class="row">
+        <div class="col">
+            <form action="/register" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="email">Su correo electronico</label>
+                    <input type="email" name="email" class="form-control" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Cree una contraseña</label>
+                    <input type="password" name="password" class="form-control" id="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="cuit">CUIT</label>
+                    <input type="number" name="cuit" class="form-control" id="cuit" required>
+
+                </div>
+                <div class="form-group">
+                    <label for="numerodecelular">Numero de celular</label>
+                    <input type="text" name="numerodecelular" class="form-control" id="numerodecelular" required>
+                </div>
+                <div class="form-group">
+                    <label for="dniadelante">Foto de la parte de adelante de su DNI</label>
+                    <div class="custom-file">
+                        <input type="file" name="dni" class="custom-file-input" id="customFileLang2" lang="es">
+                        <label class="custom-file-label" for="customFileLang2">Seleccionar Archivo</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="dniatras">Foto de la parte de atras de su DNI</label>
+                    <div class="custom-file">
+                        <input type="file" name="dni1" class="custom-file-input" id="customFileLang" lang="es">
+                        <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-info">Registrarse</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="password">Cree una contraseña</label>
-            <input type="password" name="password" class="form-control" id="password"   >
-        </div>
-        <div class="form-group">
-            <label for="numerodecelular">Numero de celular</label>
-            <input type="text" name="numerodecelular" class="form-control" id="numerodecelular"   >
-        </div>
-        <div class="form-group">
-            <label for="dniadelante">Foto de la parte de adelante de su DNI</label>
-            <input type="file" class="form-control-file" name="dni" id="dniadelante">
-        </div>
-        <div class="form-group">
-            <label for="dniatras">Foto de la parte de atras de su DNI</label>
-            <input type="file" class="form-control-file" name="dni" id="dniatras">
-        </div>
-        <button type="submit" class="btn btn-info">Registrarse</button>
-    </form>
+    </div>
 </div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 <% include ./layouts/footer %>
