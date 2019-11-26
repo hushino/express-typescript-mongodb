@@ -40,6 +40,10 @@ export async function contribuyente(req: Request, res: Response, next: any) {
 export async function inspector(req: Request, res: Response) {
     res.render('inspector', { title: 'Express' })
 }
+
+// Permitir crear y borrar cuentas de inspector
+// Mostrar los contribuyentes y editar su cuenta cambiar estado verificado/en espera/denegado
+// De igual forma mostrar los camiones
 export async function admin(req: Request, res: Response) {
     const userr = await Camion.find({})
     console.log(userr)
