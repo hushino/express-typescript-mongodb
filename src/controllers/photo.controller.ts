@@ -48,7 +48,7 @@ export async function admin(req: Request, res: Response, next: any) {
     let perPage: number = 4;
     let page: any = req.params.page || 1;
     try {
-        await User.find({}).sort({ createdAt: -1 })
+       const user = await User.find({}).sort({ createdAt: -1 })
             .skip(perPage * page - perPage)
             .limit(perPage)
             .lean()
@@ -60,6 +60,7 @@ export async function admin(req: Request, res: Response, next: any) {
                         current: page,
                         pages: Math.ceil(count / perPage)
                     });
+                    console.log(user)
                 });
             });
     } catch (err) {
@@ -111,6 +112,16 @@ export async function cambiarestadodecuenta(req: Request, res: Response) {
     camionactual.estadodecuenta = textoelegido
     //console.log(cuentaid + " " + textoelegido + " " + camionactual.estadodecuenta)
     await User.findByIdAndUpdate(cuentaid, camionactual)
+    return res.render('administrador')
+}
+export async function administradorActualizar(req: Request, res: Response) {
+    let { email, password, cuit, numerodecelular, cuentaid } = req.body
+    const userupdate = await User.findById(cuentaid)
+    userupdate.email = email
+    userupdate.password = password
+    userupdate.cuit = cuit
+    userupdate.numerodecelular = numerodecelular
+    await User.findByIdAndUpdate(cuentaid, userupdate)
     return res.render('administrador')
 }
 

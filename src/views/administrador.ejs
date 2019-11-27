@@ -14,6 +14,8 @@
                         <th scope="col">ID</th>
                         <th scope="col">DNI adelante</th>
                         <th scope="col">DNI atras</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Borrar</th>
                     </tr>
                 </thead>
 
@@ -37,6 +39,20 @@
                         </td>
                         <td><img style="max-width: 13% !important;" class="img-fluid" id="image-home"
                                 src="http://localhost:3000/<%- admincuenta.fotodniatras %>">
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#editarModal">
+                                Editar
+                            </button>
+                            <%- include('editarmodal', {admincuenta: admincuenta}); %>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#borrarModal">
+                                Borrar
+                            </button>
+                            <%- include('borrarmodal', {admincuenta: admincuenta}); %>
                         </td>
                     </tr>
                     <% }); %>

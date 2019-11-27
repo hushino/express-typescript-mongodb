@@ -7,7 +7,8 @@ const userSchema = new Schema({
     cuit: String,
     fotodnidelante: String,
     fotodniatras: String,
-    estadodecuenta:String
+    estadodecuenta: String,
+    numerodecelular:String
 });
 
 userSchema.plugin(require('mongoose-role'), {
@@ -24,6 +25,7 @@ interface IUser extends Document {
     password: string,
     role: string,
     cuit: string,
+    numerodecelular: string,
     fotodnidelante: string,
     fotodniatras: string,
     estadodecuenta:string
