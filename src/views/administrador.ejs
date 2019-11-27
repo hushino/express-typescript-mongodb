@@ -12,8 +12,8 @@
                         <th scope="col">Estado de cuenta</th>
                         <th scope="col">CUIT</th>
                         <th scope="col">ID</th>
-                        <th scope="col">Foto DNI adelante</th>
-                        <th scope="col">Foto DNI atras</th>
+                        <th scope="col">DNI adelante</th>
+                        <th scope="col">DNI atras</th>
                     </tr>
                 </thead>
 
@@ -33,10 +33,10 @@
                         <td><%- admincuenta.cuit  %></td>
                         <td><%- admincuenta._id  %></td>
                         <td><img style="max-width: 13% !important;" class="img-fluid" id="image-home"
-                                src="http://localhost:3000/<%- admincuenta.fotodniatras %>">
+                                src="http://localhost:3000/<%- admincuenta.fotodnidelante %>">
                         </td>
                         <td><img style="max-width: 13% !important;" class="img-fluid" id="image-home"
-                                src="http://localhost:3000/<%- admincuenta.fotodniadelante %>">
+                                src="http://localhost:3000/<%- admincuenta.fotodniatras %>">
                         </td>
                     </tr>
                     <% }); %>
