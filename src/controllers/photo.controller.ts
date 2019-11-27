@@ -41,9 +41,6 @@ export async function inspector(req: Request, res: Response) {
     res.render('inspector', { title: 'Express' })
 }
 
-// Permitir crear y borrar cuentas de inspector
-// Mostrar los contribuyentes y editar su cuenta cambiar estado verificado/en espera/denegado
-// De igual forma mostrar los camiones
 export async function admin(req: Request, res: Response, next: any) {
     let perPage: number = 4;
     let page: any = req.params.page || 1;
