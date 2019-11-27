@@ -8,20 +8,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/admincambiarstadodecuenta" method="POST">
+            <form action="/administrador" method="POST">
 
                 <div class="modal-body">
 
                     <div class="form-group">
                         <label for="textoelegido">Toque para abrir las opciones</label>
                         <select class="form-control" name="textoelegido" id="textoelegido">
-                            <option value="Pase confirmado">Confirmar verificacion de cuenta</option>
-                            <option value="Pase denegado">Denegar cuenta</option>
+                            <option value="Cuenta verificada">Confirmar verificacion de cuenta</option>
+                            <option value="Cuenta no verificada">Establecer cuenta no verificada</option>
                         </select>
                     </div>
 
-                    <input name="cuentaid" id="cuentaid" type="hidden" class="form-control"
-                        value="<%= admincuenta._id %>">
+                    <input name="cuentaid" id="cuentaid" type="text" class="form-control"
+                        value="<%- admincuenta._id %>">
 
                 </div>
                 <div class="modal-footer">

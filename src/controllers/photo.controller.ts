@@ -107,7 +107,7 @@ export async function registerGet(req: Request, res: Response) {
 export async function cambiarestadodecuenta(req: Request, res: Response) {
     const { textoelegido, cuentaid } = req.body
     //console.log('cambiarstadocuenta ' + cambiarestadocamion)
-    let camionactual = await User.findById(cuentaid)
+    const camionactual = await User.findById(cuentaid)
     camionactual.estadodecuenta = textoelegido
     //console.log(cuentaid + " " + textoelegido + " " + camionactual.estadodecuenta)
     await User.findByIdAndUpdate(cuentaid, camionactual)
