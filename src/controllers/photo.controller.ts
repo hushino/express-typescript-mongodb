@@ -60,7 +60,7 @@ export async function admin(req: Request, res: Response, next: any) {
                         current: page,
                         pages: Math.ceil(count / perPage)
                     });
-                    console.log(user)
+                    //console.log(user)
                 });
             });
     } catch (err) {
