@@ -15,7 +15,7 @@ router.route('/contribuyente/:page').get(/* hasAccess('contribuyente'), */ contr
 router.route('/inspector').get(/* hasAccess('inspector'), */ inspector).post(/* hasAccess('inspector'), */ multer.single('image'), postinspector)
 router.route('/administrador/:page*?').get(/* hasAccess('administrador'),  */admin).post(/* hasAccess('administrador'),  */cambiarestadodecuenta)
 //router.route('/admincambiarstadodecuenta').post(/* hasAccess('administrador'),  */cambiarestadodecuenta)
-router.route('/cambiarestadocamion').post(cambiarestadocamion)
+router.route('/cambiarestadocamion').post(/* hasAccess('contribuyente'), */cambiarestadocamion)
 
 /* router.route('/photos')
     .post(multer.single('image'), createPhoto)
