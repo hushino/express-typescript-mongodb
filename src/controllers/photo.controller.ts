@@ -16,7 +16,7 @@ export async function contribuyente(req: Request, res: Response, next: any) {
     let cuit = req.session.cuit
     // console.log('CUIT '+cuit)
     try {
-        const camion = await Camion.find({ cuit: cuit })
+        await Camion.find({ cuit: cuit })
             .sort({ createdAt: -1 })
             .skip(perPage * page - perPage)
             .limit(perPage)
@@ -48,15 +48,15 @@ export async function admin(req: Request, res: Response, next: any) {
     let perPage: number = 4;
     let page: any = req.params.page || 1;
     try {
-        await Camion.find({}).sort({ createdAt: -1 })
+        await User.find({}).sort({ createdAt: -1 })
             .skip(perPage * page - perPage)
             .limit(perPage)
             .lean()
-            .exec(function (err: any, camion) {
-                Camion.estimatedDocumentCount().exec(function (err: any, count: any) {
+            .exec(function (err: any, user) {
+                User.estimatedDocumentCount().exec(function (err: any, count: any) {
                     if (err) return next(err);
                     res.render("administrador", {
-                        serie: camion,
+                        admincuenta: user,
                         current: page,
                         pages: Math.ceil(count / perPage)
                     });
@@ -103,6 +103,17 @@ export async function login(req: Request, res: Response) {
 export async function registerGet(req: Request, res: Response) {
     res.render('register', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
 }
+
+export async function cambiarestadodecuenta(req: Request, res: Response) {
+    const { textoelegido, cuentaid } = req.body
+    //console.log('cambiarstadocuenta ' + cambiarestadocamion)
+    let camionactual = await User.findById(cuentaid)
+    camionactual.estadodecuenta = textoelegido
+    //console.log(cuentaid + " " + textoelegido + " " + camionactual.estadodecuenta)
+    await User.findByIdAndUpdate(cuentaid, camionactual)
+    return res.render('administrador')
+}
+
 export async function register(req: Request, res: Response) {
     let { email, password, cuit, numerodecelular } = req.body
     console.log(req.files['dni'][0].path)
@@ -114,7 +125,8 @@ export async function register(req: Request, res: Response) {
         numerodecelular: numerodecelular,
         fotodnidelante: req.files['dni'][0].path + ".png",
         fotodniatras: req.files['dni1'][0].path + ".png",
-        role: 'contribuyente'
+        role: 'contribuyente',
+        estadodecuenta: 'Aguardando verificacion'
     }
 
     await sharp(req.files['dni'][0].path)

@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import multer from '../libs/multer'
 import multer2 from '../libs/multer2'
-import { logout, cambiarestadocamion, postinspector, inspector, contribuyente, admin, login, registerGet, register, getHome, getPhotoById } from '../controllers/photo.controller'
+import { logout, cambiarestadodecuenta, cambiarestadocamion, postinspector, inspector, contribuyente, admin, login, registerGet, register, getHome, getPhotoById } from '../controllers/photo.controller'
 import hasAccess from '../auth/hasAccess'
 
 const router = Router()
@@ -14,7 +14,7 @@ router.route('/logout').get(logout)
 router.route('/contribuyente/:page').get(/* hasAccess('contribuyente'), */ contribuyente)
 router.route('/inspector').get(/* hasAccess('inspector'), */ inspector).post(/* hasAccess('inspector'), */ multer.single('image'), postinspector)
 router.route('/administrador/:page*?').get(/* hasAccess('administrador'),  */admin)
-
+router.route('/admincambiarstadodecuenta').post(/* hasAccess('administrador'),  */cambiarestadodecuenta)
 router.route('/cambiarestadocamion').post(cambiarestadocamion)
 
 /* router.route('/photos')

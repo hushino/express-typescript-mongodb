@@ -6,7 +6,8 @@ const userSchema = new Schema({
     password: String,
     cuit: String,
     fotodnidelante: String,
-    fotodniatras:String
+    fotodniatras: String,
+    estadodecuenta:String
 });
 
 userSchema.plugin(require('mongoose-role'), {
@@ -24,7 +25,8 @@ interface IUser extends Document {
     role: string,
     cuit: string,
     fotodnidelante: string,
-    fotodniatras:string
+    fotodniatras: string,
+    estadodecuenta:string
 }
 
 /* userSchema.methods.encryptPassword = async (password: any) => {

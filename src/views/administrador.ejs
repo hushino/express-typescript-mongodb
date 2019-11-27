@@ -3,98 +3,79 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <p>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    Cuentas de contribuyente
-                </button>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample2"
-                    aria-expanded="false" aria-controls="collapseExample2">
-                    Cuentas de inspectores
-                </button>
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample3"
-                    aria-expanded="false" aria-controls="collapseExample3">
-                    Camiones
-                </button>
-            </p>
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
-                    Cuentas de contribuyentes
-                </div>
-            </div>
-            <div class="collapse" id="collapseExample2">
-                <div class="card card-body">
-                    Cuentas de inspectores
-                </div>
-            </div>
-            <div class="collapse" id="collapseExample3">
-                <div class="card card-body">
-                        <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Patente</th>
-                                        <th scope="col">Cuit</th>
-                                        <th scope="col">Confirmar pase del camion</th>
-                                        <th scope="col">Imagen del camion</th>
-                                    </tr>
-                                </thead>
-        
-                                <tbody>
-                                    <% if(typeof serie !== 'undefined') { %>
-        
-                                    <% serie.forEach(function(serie) { %>
-                                    <tr>
-                                        <td><%- serie.patente.substring(0,10)%></td>
-                                        <td><%- serie.cuit.substring(0,15) %></td>
-                                        <td><button type="button" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#exampleModal">
-                                                <%- serie.estadocamion %>
-                                            </button>
-                                            <%- include('form', {serie: serie}); %>
-                                        </td>
-                                        <td><img style="max-width: 13% !important;" class="img-fluid" id="image-home"
-                                                src="http://localhost:3000/<%- serie.image %>" alt="Card image cap">
-                                        </td>
-                                    </tr>
-                                    <% }); %>
-                                    <% } %>
-        
-                                </tbody>
-                            </table>
-        
-                            <nav aria-label="Page navigation example">
-                                <% if(typeof pages !== 'undefined') { %>
-                                <% if (pages > 0) { %>
-                                <ul class="pagination">
-                                    <% if (current == 1) { %>
-                                    <li class="page-item"><a class="page-link" class="disabled">
-                                            << </a> <% } else { %> <a class="page-link" href="/administrador/1">
-                                                <<</a> <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-                                                    <% if (i !== 1) { %> <a class="page-link" class="disabled">...
-                                        </a></li>
-                                    <% } %>
-                                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
-                                    <% if (i == current) { %>
-                                    <li class="page-item"><a class="page-link active"><%= i %></a></li>
-                                    <% } else { %>
-                                    <li class="page-item"><a class="page-link" href="/administrador/<%= i %>"><%= i %></a></li>
-                                    <% } %>
-                                    <% if (i == Number(current) + 4 && i < pages) { %>
-                                    <li class="page-item"><a class="page-link disabled">...</a></li>
-                                    <% } %>
-                                    <% } %>
-                                    <% if (current == pages) { %>
-                                    <li class="page-item"><a class="page-link disabled">>></a></li>
-                                    <% } else { %>
-                                    <li class="page-item"><a class="page-link" href="/administrador/<%= pages %>">>></a></li>
-                                    <% } %>
-                                </ul>
-                                <% } %>
-                                <% } %>
-                            </nav>
-                </div>
-            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Email</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Estado de cuenta</th>
+                        <th scope="col">CUIT</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Foto DNI adelante</th>
+                        <th scope="col">Foto DNI atras</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% if(typeof admincuenta !== 'undefined') { %>
+
+                    <% admincuenta.forEach(function(admincuenta) { %>
+                    <tr>
+                        <td><%- admincuenta.email%></td>
+                        <td><%- admincuenta.role.substring(0,25) %></td>
+                        <td><button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#exampleModal">
+                                <%- admincuenta.estadodecuenta %>
+                            </button>
+                            <%- include('form2', {admincuenta: admincuenta}); %>
+                        </td>
+                        <td><%- admincuenta.cuit  %></td>
+                        <td><%- admincuenta._id  %></td>
+                        <td><img style="max-width: 13% !important;" class="img-fluid" id="image-home"
+                                src="http://localhost:3000/<%- admincuenta.fotodniatras %>">
+                        </td>
+                        <td><img style="max-width: 13% !important;" class="img-fluid" id="image-home"
+                                src="http://localhost:3000/<%- admincuenta.fotodniadelante %>">
+                        </td>
+                    </tr>
+                    <% }); %>
+                    <% } %>
+
+                </tbody>
+            </table>
+
+            <nav aria-label="Page navigation example">
+                <% if(typeof pages !== 'undefined') { %>
+                <% if (pages > 0) { %>
+                <ul class="pagination">
+                    <% if (current == 1) { %>
+                    <li class="page-item"><a class="page-link" class="disabled">
+                            << </a> <% } else { %> <a class="page-link" href="/administrador/1">
+                                <<</a> <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                                    <% if (i !== 1) { %> <a class="page-link" class="disabled">...
+                        </a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                    <% if (i == current) { %>
+                    <li class="page-item"><a class="page-link active"><%= i %></a></li>
+                    <% } else { %>
+                    <li class="page-item"><a class="page-link" href="/administrador/<%= i %>"><%= i %></a></li>
+                    <% } %>
+                    <% if (i == Number(current) + 4 && i < pages) { %>
+                    <li class="page-item"><a class="page-link disabled">...</a></li>
+                    <% } %>
+                    <% } %>
+                    <% if (current == pages) { %>
+                    <li class="page-item"><a class="page-link disabled">>></a></li>
+                    <% } else { %>
+                    <li class="page-item"><a class="page-link" href="/administrador/<%= pages %>">>></a></li>
+                    <% } %>
+                </ul>
+                <% } %>
+                <% } %>
+            </nav>
         </div>
     </div>
-</div>
-<% include ./layouts/footer %>
+
+    <% include ./layouts/footer %>
