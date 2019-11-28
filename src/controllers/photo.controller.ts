@@ -45,7 +45,7 @@ export async function admin(req: Request, res: Response, next: any) {
     let perPage: number = 4;
     let page: any = req.params.page || 1;
     try {
-       const user = await User.find({}).sort({ createdAt: -1 })
+     /*   const user =  */await User.find({}).sort({ createdAt: -1 })
             .skip(perPage * page - perPage)
             .limit(perPage)
             .lean()

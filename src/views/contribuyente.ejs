@@ -21,7 +21,21 @@
             <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     <%- serie.estadocamion %>
                 </button>
-                <%- include('form', {serie: serie}); %>
+                <form action="/cambiarestadocamion" method="POST">
+                        <div class="form-group">
+                            <label for="cambiarestadocamion">Toque para abrir las opciones</label>
+                            <select class="form-control" name="cambiarestadocamion" id="cambiarestadocamion">
+                                <option value="Pase confirmado">Confirmar pase del camion</option>
+                                <option value="Pase denegado">Denegar pase del camion</option>
+                            </select>
+                        </div>
+
+                        <input name="cambiarestadocamion2" id="cambiarestadocamion2" type="hidden" class="form-control"
+                            value="<%- serie._id %>">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger">Aplicar cambios de estado</button>
+                        </div>
+                </form>
             </td>
             <td><img style="max-width: 13% !important;" class="img-fluid" id="image-home"
                     src="http://localhost:3000/<%- serie.image %>" alt="Card image cap">

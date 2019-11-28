@@ -1,5 +1,11 @@
 <% include ./layouts/header %>
 <h1>Panel de Administracion</h1>
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css"
     integrity="sha256-HAaDW5o2+LelybUhfuk0Zh2Vdk8Y2W2UeKmbaXhalfA=" crossorigin="anonymous" />
 <div class="container">
@@ -28,11 +34,38 @@
                     <tr>
                         <td><%- admincuenta.email%></td>
                         <td><%- admincuenta.role.substring(0,25) %></td>
-                        <td><button type="button" class="btn btn-primary" data-toggle="modal"
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#exampleModal">
                                 <%- admincuenta.estadodecuenta %>
                             </button>
-                            <%- include('form2', {admincuenta: admincuenta}); %>
+
+                            <!-- Modal HTML embedded directly into document -->
+                            <div id="ex1" class="modal">
+                                <form action="/administrador" method="POST">
+                                    <div class="form-group">
+                                        <label for="textoelegido">Toque para abrir las opciones</label>
+                                        <select class="form-control" name="textoelegido" id="textoelegido">
+                                            <option value="Cuenta verificada">Confirmar verificacion de cuenta</option>
+                                            <option value="Cuenta no verificada">Establecer cuenta no verificada
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <input name="cuentaid" id="cuentaid" type="text" class="form-control"
+                                        value="<%- admincuenta._id %>">
+
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger">Aplicar cambios de estado</button>
+                                    </div>
+                                </form>
+                                <a href="#" rel="modal:close">Close</a>
+                            </div>
+
+                            <!-- Link to open the modal -->
+                            <p><a href="#ex1" rel="modal:open">Open Modal</a></p>
+
+
                         </td>
                         <td><%- admincuenta.cuit  %></td>
                         <td><%- admincuenta._id  %></td>
@@ -53,8 +86,64 @@
                                 data-target="#editarModal">
                                 Editar
                             </button>
-                            <%- include('editarmodal', {admincuenta: admincuenta}); %>
-                            
+
+                            <div id="ex2" class="modal">
+                                <form action="/administradorActualizar" method="POST">
+
+                                    <div class="modal-body">
+                                        <input name="cuentaid" id="cuentaid" type="text" class="form-control"
+                                            value="<%- admincuenta._id %>">
+                                        <div class="form-group">
+                                            <label for="email">Su correo electronico</label>
+                                            <input value="<%- admincuenta.email %>" type="email" name="email"
+                                                class="form-control" id="email" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password">Cree una contraseña</label>
+                                            <input value="<%- admincuenta.password %>" type="text" name="password"
+                                                class="form-control" id="password" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cuit">CUIT</label>
+                                            <input value="<%- admincuenta.cuit %>" type="number" name="cuit"
+                                                class="form-control" id="cuit" required>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="numerodecelular">Numero de celular</label>
+                                            <input value="<%- admincuenta.numerodecelular %>" type="text"
+                                                name="numerodecelular" class="form-control" id="numerodecelular"
+                                                required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="dniadelante">Foto de la parte de adelante de su DNI</label>
+                                            <div class="custom-file">
+                                                <input type="file" name="dni" class="custom-file-input"
+                                                    id="customFileLang2" lang="es">
+                                                <label class="custom-file-label" for="customFileLang2">Seleccionar
+                                                    Archivo</label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="dniatras">Foto de la parte de atras de su DNI</label>
+                                            <div class="custom-file">
+                                                <input type="file" name="dni1" class="custom-file-input"
+                                                    id="customFileLang" lang="es">
+                                                <label class="custom-file-label" for="customFileLang">Seleccionar
+                                                    Archivo</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-danger">Aplicar cambios</button>
+                                    </div>
+                                </form>
+                                <a href="#" rel="modal:close">Close</a>
+                            </div>
+                            <p><a href="#ex2" rel="modal:open">Open Modal</a></p>
+
+
                         </td>
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal"
