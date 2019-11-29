@@ -1,0 +1,51 @@
+<form action="/administradorActualizar" method="POST">
+
+    <div class="modal-body">
+        <input name="cuentaid" id="cuentaid" type="text" class="form-control"
+            value="<%- admincuenta._id %>">
+        <div class="form-group">
+            <label for="email">Su correo electronico</label>
+            <input value="<%- admincuenta.email %>" type="email" name="email"
+                class="form-control" id="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Cree una contraseña</label>
+            <input value="<%- admincuenta.password %>" type="text" name="password"
+                class="form-control" id="password" required>
+        </div>
+        <div class="form-group">
+            <label for="cuit">CUIT</label>
+            <input value="<%- admincuenta.cuit %>" type="number" name="cuit"
+                class="form-control" id="cuit" required>
+
+        </div>
+        <div class="form-group">
+            <label for="numerodecelular">Numero de celular</label>
+            <input value="<%- admincuenta.numerodecelular %>" type="text"
+                name="numerodecelular" class="form-control" id="numerodecelular"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="dniadelante">Foto de la parte de adelante de su DNI</label>
+            <div class="custom-file">
+                <input type="file" name="dni" class="custom-file-input"
+                    id="customFileLang2" lang="es">
+                <label class="custom-file-label" for="customFileLang2">Seleccionar
+                    Archivo</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="dniatras">Foto de la parte de atras de su DNI</label>
+            <div class="custom-file">
+                <input type="file" name="dni1" class="custom-file-input"
+                    id="customFileLang" lang="es">
+                <label class="custom-file-label" for="customFileLang">Seleccionar
+                    Archivo</label>
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger">Aplicar cambios</button>
+    </div>
+</form>

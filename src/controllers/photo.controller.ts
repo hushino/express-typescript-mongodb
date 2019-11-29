@@ -16,6 +16,14 @@ export async function borrarcuenta(req: Request, res: Response) {
     await User.findByIdAndDelete(borrarid)
     res.render("administrador")
 }
+
+export async function editarfromadmin(req: Request, res: Response) {
+    const { id } = req.params
+    console.log('AAAAAAAAAAAAAAAAAAAAAAA ' + id)
+    const ids = await User.findById(id)
+    res.render("editarfromadmin",{admincuenta:ids})
+
+}
 export async function contribuyente(req: Request, res: Response, next: any) {
     let perPage: number = 4;
     let page: any = req.params.page || 1;
