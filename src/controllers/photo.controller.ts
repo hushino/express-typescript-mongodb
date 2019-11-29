@@ -10,6 +10,12 @@ import twilio from 'twilio'
 export async function getHome(req: Request, res: Response) {
     res.render('index', { title: 'Control de camiones' })
 }
+export async function borrarcuenta(req: Request, res: Response) {
+    let { borrarid } = req.body
+    //console.log(borrarid)
+    await User.findByIdAndDelete(borrarid)
+    res.render("administrador")
+}
 export async function contribuyente(req: Request, res: Response, next: any) {
     let perPage: number = 4;
     let page: any = req.params.page || 1;
