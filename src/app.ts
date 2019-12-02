@@ -41,7 +41,7 @@ export class App {
              }), */
             saveUninitialized: false,
             resave: false,
-            cookie: { secure: false, maxAge: 600000 }
+            cookie: { secure: false, maxAge: 6000000000 } //69 dias
         }));
         this.app.use((req, res, next) => {
             let admin = 'administrador'
