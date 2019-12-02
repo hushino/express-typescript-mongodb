@@ -44,31 +44,23 @@
                                 <%- admincuenta.estadodecuenta %>
                             </button>
 
-                            <!-- Modal HTML embedded directly into document -->
-                            <div id="ex1" class="modal">
-                                <form action="/administrador" method="POST">
-                                    <div class="form-group">
-                                        <label for="textoelegido">Toque para abrir las opciones</label>
-                                        <select class="form-control" name="textoelegido" id="textoelegido">
-                                            <option value="Cuenta verificada">Confirmar verificacion de cuenta</option>
-                                            <option value="Cuenta no verificada">Establecer cuenta no verificada
-                                            </option>
-                                        </select>
-                                    </div>
+                            <form action="/administrador" method="POST">
+                                <div class="form-group">
+                                    <label for="textoelegido">Toque para abrir las opciones</label>
+                                    <select class="form-control" name="textoelegido" id="textoelegido">
+                                        <option value="Cuenta verificada">Confirmar verificacion de cuenta</option>
+                                        <option value="Cuenta no verificada">Establecer cuenta no verificada
+                                        </option>
+                                    </select>
+                                </div>
 
-                                    <input name="cuentaid" id="cuentaid" type="text" class="form-control"
-                                        value="<%- admincuenta._id %>">
+                                <input name="cuentaid" id="cuentaid" type="text" class="form-control"
+                                    value="<%- admincuenta._id %>">
 
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-danger">Aplicar cambios de estado</button>
-                                    </div>
-                                </form>
-                                <a href="#" rel="modal:close">Close</a>
-                            </div>
-
-                            <!-- Link to open the modal -->
-                            <p><a href="#ex1" rel="modal:open">Open Modal</a></p>
-
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-danger">Aplicar cambios de estado</button>
+                                </div>
+                            </form>
 
                         </td>
                         <td><%- admincuenta.cuit  %></td>
@@ -86,7 +78,7 @@
                             </a>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-primary"  >
+                            <button type="button" class="btn btn-primary">
                                 <a style="color: aliceblue;" href="/editarfromadmin/<%- admincuenta._id  %>">Editar</a>
                             </button>
                         </td>
