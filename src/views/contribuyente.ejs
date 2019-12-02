@@ -18,27 +18,32 @@
         <tr>
             <td><%- serie.patente.substring(0,10)%></td>
             <td><%- serie.cuit.substring(0,15) %></td>
-            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <td style="min-width: 300px;">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     <%- serie.estadocamion %>
                 </button>
                 <form action="/cambiarestadocamion" method="POST">
-                        <div class="form-group">
-                            <label for="cambiarestadocamion">Toque para abrir las opciones</label>
-                            <select class="form-control" name="cambiarestadocamion" id="cambiarestadocamion">
-                                <option value="Pase confirmado">Confirmar pase del camion</option>
-                                <option value="Pase denegado">Denegar pase del camion</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <label for="cambiarestadocamion">Toque para abrir las opciones</label>
+                        <select class="form-control" name="cambiarestadocamion" id="cambiarestadocamion">
+                            <option value="Pase confirmado">Confirmar pase del camion</option>
+                            <option value="Pase denegado">Denegar pase del camion</option>
+                        </select>
+                    </div>
 
-                        <input name="cambiarestadocamion2" id="cambiarestadocamion2" type="hidden" class="form-control"
-                            value="<%- serie._id %>">
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-danger">Aplicar cambios de estado</button>
-                        </div>
+                    <input name="cambiarestadocamion2" id="cambiarestadocamion2" type="hidden" class="form-control"
+                        value="<%- serie._id %>">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger">Aplicar cambios de estado</button>
+                    </div>
                 </form>
             </td>
-            <td><img style="max-width: 13% !important;" class="img-fluid" id="image-home"
+            <td>
+                <a href="http://localhost:3000/<%- serie.image %>" data-toggle="lightbox">
+                <img  style="max-width: 13% !important;" class="img-fluid" id="image-home"
                     src="http://localhost:3000/<%- serie.image %>" alt="Card image cap">
+            </a>
+                
             </td>
         </tr>
         <% }); %>
@@ -80,3 +85,12 @@
 </nav>
 
 <% include ./layouts/footer %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"
+    integrity="sha256-Y1rRlwTzT5K5hhCBfAFWABD4cU13QGuRN6P5apfWzVs=" crossorigin="anonymous"></script>
+<script>
+    $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>
