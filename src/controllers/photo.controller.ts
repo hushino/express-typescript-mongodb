@@ -116,7 +116,7 @@ export async function registerGet(req: Request, res: Response) {
     res.render('register', { title: "registro correcto", registerexito: 'Se registro correctamente, ya puede iniciar sesion' })
 }
 
-export async function cambiarestadodecuenta(req: Request, res: Response) {
+/* export async function cambiarestadodecuenta(req: Request, res: Response) {
     const { textoelegido, cuentaid } = req.body
     //console.log('cambiarstadocuenta ' + cambiarestadocamion)
     const camionactual = await User.findById(cuentaid)
@@ -124,14 +124,15 @@ export async function cambiarestadodecuenta(req: Request, res: Response) {
     //console.log(cuentaid + " " + textoelegido + " " + camionactual.estadodecuenta)
     await User.findByIdAndUpdate(cuentaid, camionactual)
     return res.render('administrador')
-}
+} */
 export async function administradorActualizar(req: Request, res: Response) {
-    let { email, password, cuit, numerodecelular, cuentaid } = req.body
+    let { email,textoelegido, password, cuit, numerodecelular, cuentaid } = req.body
     const userupdate = await User.findById(cuentaid)
     userupdate.email = email
     userupdate.password = password
     userupdate.cuit = cuit
     userupdate.numerodecelular = numerodecelular
+    userupdate.estadodecuenta = textoelegido
     await User.findByIdAndUpdate(cuentaid, userupdate)
     return res.render('administrador')
 }

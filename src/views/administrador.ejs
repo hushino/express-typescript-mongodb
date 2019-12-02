@@ -44,23 +44,7 @@
                                 <%- admincuenta.estadodecuenta %>
                             </button>
 
-                            <form action="/administrador" method="POST">
-                                <div class="form-group">
-                                    <label for="textoelegido">Toque para abrir las opciones</label>
-                                    <select class="form-control" name="textoelegido" id="textoelegido">
-                                        <option value="Cuenta verificada">Confirmar verificacion de cuenta</option>
-                                        <option value="Cuenta no verificada">Establecer cuenta no verificada
-                                        </option>
-                                    </select>
-                                </div>
-
-                                <input name="cuentaid" id="cuentaid" type="text" class="form-control"
-                                    value="<%- admincuenta._id %>">
-
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-danger">Aplicar cambios de estado</button>
-                                </div>
-                            </form>
+                           
 
                         </td>
                         <td><%- admincuenta.cuit  %></td>
