@@ -139,8 +139,8 @@ export async function administradorActualizar(req: Request, res: Response) {
 
 export async function register(req: Request, res: Response) {
     let { email, password, cuit, numerodecelular } = req.body
-    console.log(req.files['dni'][0].path)
-    console.log(req.files['dni1'][0].path)
+    //console.log(req.files['dni'][0].path)
+    //console.log(req.files['dni1'][0].path)
     let newUser = {
         email: email,
         password: password,
